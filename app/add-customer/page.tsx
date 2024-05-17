@@ -3,7 +3,10 @@ import {
   PaperClipIcon
 } from '@heroicons/react/20/solid';
 import { upload } from '@/apihandler/upload.api';
+import { WebCamComponent } from '@/components/webcam';
+import { useState } from 'react';
 export default function AddCustomer() {
+    const [openCamera, setOpenCamera ] = useState(false);
     const handleClick = () => {
         console.log("Floating button clicked");
     
@@ -69,6 +72,11 @@ export default function AddCustomer() {
                     <PaperClipIcon className="w-5 h-5 sm:w-6 sm:h-6" />
                 </label>
       </div>
+      <button onClick={() => setOpenCamera(true)}>Open Camera</button>
+      {openCamera ? <div>
+        <p>This is camera</p>
+        <WebCamComponent onClose={() => setOpenCamera(false)}  />
+      </div> : null}
     </div>
   );
 }
