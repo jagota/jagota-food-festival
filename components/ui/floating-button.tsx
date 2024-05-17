@@ -16,7 +16,7 @@ const FloatingButton = ({ onClick, contentType }: ButtonProps) => {
     className="fixed bottom-10 right-10 z- 10 p-0 w-14 h-14 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
       <svg
         viewBox="0 0 20 20"
-        enable-background="new 0 0 20 20"
+        enableBackground="new 0 0 20 20"
         className="w-6 h-6 inline-block"
       >
         <path
