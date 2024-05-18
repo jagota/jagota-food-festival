@@ -1,12 +1,15 @@
 "use client";
+import { dataUrlToFile } from "@/lib/base64ToImage";
+import { uploadFile } from "@/lib/getSignedUrl";
 import { useCallback, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
 interface IWebCamComponentProps {
   onClose: () => void;
+  onSave: (url: string) => void;
 }
 type facingModeType = "user" | "environment";
-const WebCamComponent = ({ onClose }: IWebCamComponentProps) => {
+const WebCamComponent = ({ onClose, onSave }: IWebCamComponentProps) => {
   const [facingMode, setFacingMode] = useState<facingModeType>("environment");
   const webcamRef = useRef<Webcam>(null);
   const [img, setImg] = useState<string | null | undefined>(null);
@@ -16,6 +19,16 @@ const WebCamComponent = ({ onClose }: IWebCamComponentProps) => {
     console.log("imageSrc", imageSrc);
     setImg(imageSrc);
   }, [webcamRef]);
+
+  const save = async () => {
+    if (!img) return;
+    const fileName = `${Date.now() + Math.random()}-webcam-image.png`;
+    const file = await dataUrlToFile(img, fileName);
+    const url = await uploadFile(file);
+    onSave(url);
+    return url;
+  }
+
   const videoConstraints = {
     facingMode,
   };
@@ -34,6 +47,7 @@ const WebCamComponent = ({ onClose }: IWebCamComponentProps) => {
       <button className="fixed bottom-10 left-10" onClick={onClose}>
         close
       </button>
+     
       <button
         onClick={() =>
           setFacingMode(facingMode === "user" ? "environment" : "user")
@@ -58,6 +72,9 @@ const WebCamComponent = ({ onClose }: IWebCamComponentProps) => {
       </> : <>
             <img src={img} alt="screenshot" />
           <button className="w-12 h-12 bg-indigo text-white" onClick={() => setImg(null)}>Recapture</button>
+          <button className="fixed bottom-10 right-10" onClick={save}>
+        save
+      </button>
       </>}
     </div>
   );
