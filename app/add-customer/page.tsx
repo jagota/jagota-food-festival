@@ -3,6 +3,7 @@ import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { WebCamComponent } from "@/components/webcam";
 import { useState } from "react";
 import { uploadFile } from "@/lib/getSignedUrl";
+import { AudioRecorderComponent } from "@/components/audioRecorder";
 export default function AddCustomer() {
   const [openCamera, setOpenCamera] = useState(false);
   const [webcamImage, setWebcamImage] = useState<string | null | undefined>(null);
@@ -56,6 +57,7 @@ export default function AddCustomer() {
           <WebCamComponent onSave={(url) => setWebcamImage(url)} onClose={() => setOpenCamera(false)} />
         </div>
       ) : null}
+      <AudioRecorderComponent onSave={(url) => setWebcamImage(url)} onClose={() => setOpenCamera(false)} />
     </div>
   );
 }
