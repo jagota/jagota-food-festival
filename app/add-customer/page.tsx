@@ -6,7 +6,11 @@ import { uploadFile } from "@/lib/getSignedUrl";
 import { AudioRecorderComponent } from "@/components/audioRecorder";
 export default function AddCustomer() {
   const [openCamera, setOpenCamera] = useState(false);
-  const [webcamImage, setWebcamImage] = useState<string | null | undefined>(null);
+  const [openRecorder, setOpenRecorder] = useState(false);
+
+  const [webcamImage, setWebcamImage] = useState<string | null | undefined>(
+    null
+  );
   const handleClick = () => {
     console.log("Floating button clicked");
   };
@@ -51,13 +55,21 @@ export default function AddCustomer() {
         </label>
       </div>
       <button onClick={() => setOpenCamera(true)}>Open Camera</button>
+      <button onClick={() => setOpenRecorder(true)}>Open Recorder</button>
       {openCamera ? (
-        <div>
-          <p>This is camera</p>
-          <WebCamComponent onSave={(url) => setWebcamImage(url)} onClose={() => setOpenCamera(false)} />
-        </div>
+        <WebCamComponent
+            onSave={(url) => setWebcamImage(url)}
+            onClose={() => setOpenCamera(false)}
+        />
       ) : null}
-      <AudioRecorderComponent onSave={(url) => setWebcamImage(url)} onClose={() => setOpenCamera(false)} />
+
+      {openRecorder ? (
+        <AudioRecorderComponent
+            onSave={(url) => setWebcamImage(url)}
+            onClose={() => setOpenRecorder(false)}
+        />
+      ) : null}
+      
     </div>
   );
 }
