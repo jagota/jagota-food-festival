@@ -1,0 +1,1 @@
+export type ChipItem = { name: string, id: number | string}

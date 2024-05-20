@@ -86,8 +86,15 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "recording": "recording 2s infinite ease-in-out"
       },
+      transformOrigin: {
+        "0": "0%",
+      },
+      zIndex: {
+        "-1": "-1",
+      },
     },
   },
+  variants: { borderColor: ["responsive", "hover", "focus", "focus-within"] },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
 
