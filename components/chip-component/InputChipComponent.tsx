@@ -8,6 +8,7 @@ import {
   } from "react";
   import { ChipItem } from "./chipItem.type";
   import { Chip } from "./chip";
+import { useOnOutsideClick } from "@/hooks/useOutsideClick";
   
   interface InputChipComponent {
     list: ChipItem[];
@@ -34,13 +35,16 @@ import {
       isReadyToDelete: false,
       data: null,
     });
+
+    const ref = useOnOutsideClick(() => {
+      setIsFocused(false);
+    })
     const handleFocus = () => {
       setIsFocused(true);
     };
   
     const handleBlur = () => {
       setTimeout(() => {
-        setIsFocused(false);
         setIsToBeDeleted({
           isReadyToDelete: false,
           data: null,
@@ -106,7 +110,7 @@ import {
     }, [chips.length]);
   
     return (
-      <div className="relative">
+      <div ref={ref} className="relative">
         <div
           className={`border-2 min-w-[400px] transition-all rounded-md ${
             isFocused ? "border-[#3b82f6]" : "border-[#ddd]"

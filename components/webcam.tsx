@@ -35,6 +35,7 @@ const WebCamComponent = ({ onClose, onSave }: IWebCamComponentProps) => {
     const file = await dataUrlToFile(img, fileName);
     const url = await uploadFile(file);
     onSave(url);
+    onClose();
     return url;
   };
 
@@ -42,7 +43,7 @@ const WebCamComponent = ({ onClose, onSave }: IWebCamComponentProps) => {
     facingMode,
   };
   return (
-    <div className="fixed top-0 bottom-0 min-w-full min-h-screen flex items-center bg-gradient-to-r from-neutral-50 to-violet-300">
+    <div className="fixed z-20 top-0 bottom-0 min-w-full min-h-screen flex items-center bg-gradient-to-r from-neutral-50 to-violet-300">
       {img === null ? (
           <Webcam
             style={{ width: "100%", height: "100%", objectFit: "cover" }}

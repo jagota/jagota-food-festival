@@ -19,7 +19,7 @@ const classes = {
   ${classNames}
   `,
   buttonText: (variant?: Variant) => cntl`
-  text-base absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
+  text-base absolute z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
   ${variant === 'primary' ? 'group-hover:text-blue-500' : ''}
   ${variant === 'secondary' ? 'group-hover:text-white' : ''}
 

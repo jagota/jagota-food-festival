@@ -123,6 +123,7 @@ export const AudioRecorderComponent = ({
     const url = await uploadFile(file);
     console.log("url", url);
     onSave(url);
+    onClose();
     return url;
   };
 

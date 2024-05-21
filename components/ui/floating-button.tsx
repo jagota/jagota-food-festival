@@ -1,19 +1,99 @@
 import * as React from "react";
-type floatingButtonType = "plus" | "minus" | "cross" | "check" | "menu";
+import cntl from "cntl";
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+const classes = {
+  button: (classNames?: string, color?: string) => cntl`
+  z-10 p-0 w-14 h-14  rounded-full 
+  active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none
+  ${color ? color : "bg-red-500 hover:bg-red-700"}
+  ${classNames ? classNames : "fixed bottom-10 right-10"}
+  `,
+};
+
+type floatingButtonType =
+  | "plus"
+  | "minus"
+  | "close"
+  | "check"
+  | "menu"
+  | "audio"
+  | "photo";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   contentType?: floatingButtonType;
   onClick?: () => void;
+  classNames?: string;
+  color?: string;
 }
 
-const FloatingButton = ({ onClick, contentType }: ButtonProps) => {
-    if (contentType !== "plus") {
-        return null;
+const FloatingButton = ({
+  onClick,
+  contentType,
+  classNames,
+  color,
+}: ButtonProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick();
     }
-  return (
-    <button 
-    onClick={onClick}
-    className="fixed bottom-10 right-10 z- 10 p-0 w-14 h-14 bg-red-600 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+  };
+  const renderSVG = () => {
+    if (contentType === "close") {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="white"
+          className="w-6 h-6 inline-block"
+        >
+          <path
+            fill="#FFFFFF"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          />
+        </svg>
+      );
+    } else if (contentType === "audio") {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="white"
+          className="w-6 h-6 inline-block"
+        >
+          <path d="M8.25 4.5a3.75 3.75 0 1 1 7.5 0v8.25a3.75 3.75 0 1 1-7.5 0V4.5Z" />
+          <path d="M6 10.5a.75.75 0 0 1 .75.75v1.5a5.25 5.25 0 1 0 10.5 0v-1.5a.75.75 0 0 1 1.5 0v1.5a6.751 6.751 0 0 1-6 6.709v2.291h3a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5h3v-2.291a6.751 6.751 0 0 1-6-6.709v-1.5A.75.75 0 0 1 6 10.5Z" />
+        </svg>
+      );
+    } else if (contentType === "photo") {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="white"
+          className="w-6 h-6 inline-block"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5Z"
+          />
+        </svg>
+      );
+    }
+    return (
       <svg
         viewBox="0 0 20 20"
         enableBackground="new 0 0 20 20"
@@ -26,6 +106,11 @@ const FloatingButton = ({ onClick, contentType }: ButtonProps) => {
                                     C15.952,9,16,9.447,16,10z"
         />
       </svg>
+    );
+  };
+  return (
+    <button onClick={handleClick} className={classes.button(classNames, color)}>
+      {renderSVG()}
     </button>
   );
 };
