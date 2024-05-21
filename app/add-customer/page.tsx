@@ -125,11 +125,9 @@ export default function AddCustomer() {
     audio: audio ? audio : "",
     };
     await addCustomer(customerData)
-    console.log("Floating button clicked", customerData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("e.target.id", e, e.currentTarget.id, e.target.value);
     setCustomer({ ...customer, [e.target.id]: e.target.value });
   };
 
@@ -236,7 +234,7 @@ export default function AddCustomer() {
             return (
               <div key={key} className="flex flex-col space-y-2">
                 <FormInput
-                    value={customer[key] as string}
+                    value={customer[key]}
                     label={label}
                     key={key}
                     name={key}

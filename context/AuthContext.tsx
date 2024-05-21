@@ -36,13 +36,20 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     await requestHandler(
       async () => await loginUser(data),
       setIsLoading,
-      (res) => {
-        const { data } = res;
-        setUser(data.user);
-        LocalStorage.set("user", data.user);
-        router.replace("/product") // Redirect to the chat page after successful login
+      (res: any) => {
+        const { result, flag } = res;
+        const data = result[0];
+        console.log("login data", data, res);
+        if (flag === 1 || data) {
+          setUser(data.user);
+          LocalStorage.set("user", data.NAME_E);
+          LocalStorage.set("user_code", data.STAFF_CODE);
+          router.replace("/product") // Redirect to the chat page after successful login
+        } else {
+          alert("wrong credential")
+        }
       },
-      alert // Display error alerts on request failure
+      alert,
     );
   };
 

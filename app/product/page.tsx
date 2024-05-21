@@ -7,7 +7,6 @@ import Image from "next/image";
 export default function Home() {
     const router = useRouter()
     const handleClick = () => {
-        console.log("Floating button clicked");
         router.push('/add-customer');
     }
   return (
