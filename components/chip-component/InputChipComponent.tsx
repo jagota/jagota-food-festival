@@ -112,7 +112,7 @@ import { useOnOutsideClick } from "@/hooks/useOutsideClick";
     return (
       <div ref={ref} className="relative">
         <div
-          className={`border-2 min-w-[400px] transition-all rounded-md ${
+          className={`border-2 min-w-full transition-all rounded-md ${
             isFocused ? "border-[#3b82f6]" : "border-[#ddd]"
           }`}
         >
@@ -142,7 +142,7 @@ import { useOnOutsideClick } from "@/hooks/useOutsideClick";
             />
           </div>
         </div>
-        {isFocused && <div className="absolute w-full z-10">{children}</div>}
+        {isFocused && <div className="absolute w-full z-20">{children}</div>}
       </div>
     );
   };

@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { FloatingButton } from "@/components/ui/floating-button";
 import Image from "next/image";
+import { ProductList } from './_product/ProductList';
 
 export default function Home() {
     const router = useRouter()
@@ -10,11 +11,12 @@ export default function Home() {
         router.push('/add-customer');
     }
   return (
-    <div>
+    <div className='min-w-screen min-h-screen bg-gray-100 py-20'>
+      <ProductList />
       <p>
       Product Page
       </p>
-      <FloatingButton contentType="plus" onClick={handleClick} />
+      <FloatingButton contentType="plus" classNames='fixed bottom-16 right-10' onClick={handleClick} />
     </div>
   );
 }

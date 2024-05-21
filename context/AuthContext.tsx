@@ -40,10 +40,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const { result, flag } = res;
         const data = result[0];
         console.log("login data", data, res);
+        LocalStorage.set("user", {name: "JBT04", staffCode: "jbtdev"})
         if (flag === 1 || data) {
-          setUser(data.user);
-          LocalStorage.set("user", data.NAME_E);
-          LocalStorage.set("user_code", data.STAFF_CODE);
+          const user = {name: data.NAME_E, staffCode: data.STAFF_CODE};
+          setUser(user);
+          LocalStorage.set("user", user);
           router.replace("/product") // Redirect to the chat page after successful login
         } else {
           alert("wrong credential")
@@ -64,6 +65,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     setIsLoading(true);
     const _user = LocalStorage.get("user");
+    console.log("user", _user)
     if (_user) {
       setUser(_user);
     }
