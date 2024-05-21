@@ -10,17 +10,18 @@ export const requestHandler = async (
     try {
       // Make the API request
       const response = await api();
+      console.log("response", response);
       const { data } = response;
-      if (data?.success) {
+      if (data) {
         // Call the onSuccess callback with the response data
         onSuccess(data);
       }
     } catch (error: any) {
       // Handle error cases, including unauthorized and forbidden cases
-      if ([401, 403].includes(error?.response.data?.statusCode)) {
-        localStorage.clear(); // Clear local storage on authentication issues
-      }
-      onError(error?.response?.data?.message || "Something went wrong");
+      // if ([401, 403].includes(error?.response.data?.statusCode)) {
+      //   localStorage.clear(); // Clear local storage on authentication issues
+      // }
+      // onError(error?.response?.data?.message || "Something went wrong");
     } finally {
       // Hide loading state if setLoading function is provided
       setLoading && setLoading(false);

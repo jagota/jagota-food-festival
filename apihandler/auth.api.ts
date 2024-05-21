@@ -9,7 +9,25 @@ const apiClient = axios.create({
 
 // API functions for different actions
 const loginUser = (data: { username: string; password: string }) => {
-    return apiClient.post('/auth/login', data)
+    const BodyFormData = new FormData();
+    const bodyObj = {
+        "P_COM": process.env.NEXT_PUBLIC_DEFAULT_P_COM as string,
+        "P_USER": data.username,
+        "P_PASSWORD": data.password,
+    }
+    Object.entries(bodyObj).forEach(([key, value]) => {
+      BodyFormData.append(key, value);
+    });
+    return axios.request({
+        url: `${process.env.NEXT_PUBLIC_JAGOTA_API_URL}/apip/WS_THAIFEX/GET_STAFF_INFO`,
+    
+        data: BodyFormData,
+    
+        method: 'post',
+    
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
+    // return apiClient.post('/auth/login', data)
 }
 
 

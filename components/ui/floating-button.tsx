@@ -2,11 +2,12 @@ import * as React from "react";
 import cntl from "cntl";
 
 const classes = {
-  button: (classNames?: string, color?: string) => cntl`
-  z-10 p-0 w-14 h-14  rounded-full 
+  button: (classNames?: string, color?: string, size?: string) => cntl`
+  z-10 p-0   rounded-full 
   active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none
   ${color ? color : "bg-red-500 hover:bg-red-700"}
   ${classNames ? classNames : "fixed bottom-10 right-10"}
+  ${size ? size : "w-14 h-14"}
   `,
 };
 
@@ -25,6 +26,7 @@ export interface ButtonProps
   onClick?: () => void;
   classNames?: string;
   color?: string;
+  size?: string;
 }
 
 const FloatingButton = ({
@@ -32,6 +34,7 @@ const FloatingButton = ({
   contentType,
   classNames,
   color,
+  size
 }: ButtonProps) => {
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -109,7 +112,7 @@ const FloatingButton = ({
     );
   };
   return (
-    <button onClick={handleClick} className={classes.button(classNames, color)}>
+    <button onClick={handleClick} className={classes.button(classNames, color, size)}>
       {renderSVG()}
     </button>
   );

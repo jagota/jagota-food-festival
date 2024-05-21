@@ -18,9 +18,7 @@ const uploadFile = async (file: File) => {
         },
         body: file,
     })
-    console.log('uploadToR2Response', uploadToR2Response)
     const url = `${process.env.NEXT_PUBLIC_R2_BUCKET_DOMAIN}/${objectKey}`
-    console.log('url', file.name, url, objectKey)
     return url
 }
 

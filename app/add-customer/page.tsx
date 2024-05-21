@@ -2,7 +2,6 @@
 import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { WebCamComponent } from "@/components/webcam";
 import { useState } from "react";
-import { uploadFile } from "@/lib/getSignedUrl";
 import { AudioRecorderComponent } from "@/components/audioRecorder";
 import { FormInput } from "@/components/formInput";
 import InputChipComponent from "@/components/chip-component/InputChipComponent";
@@ -14,12 +13,9 @@ import { ExpandableFloatingButton } from "@/components/ui/expandable-floating-bu
 import { FloatingButton } from "@/components/ui/floating-button";
 import { addCustomer } from "@/apihandler/customer.api";
 import { ICustomerToDB } from "@/interfaces/Customer.interface";
+import { useAuth } from "@/context/AuthContext";
 
 const addCustomerFields = [
-  {
-    key: "salesPerson",
-    label: "Sales Person",
-  },
   {
     key: "email",
     label: "Email",
@@ -78,8 +74,7 @@ const shopTypes: ChipItem[] = [
   { id: 9, name: "Food" },
 ];
 
-const initialCustomerState: ICustomerToDB = {
-  salesPerson: "",
+const initialCustomerState: Omit<ICustomerToDB, "salesPerson"> = {
   interested_in: [],
   shop_type: [],
   name: "",
@@ -93,6 +88,7 @@ const initialCustomerState: ICustomerToDB = {
 };
 
 export default function AddCustomer() {
+  const { user } = useAuth();
   // interest
   const [interestList, setInterestList] = useState(interests);
   const [selectedInterestList, setSelectedInterestList] = useState<ChipItem[]>(
@@ -101,9 +97,7 @@ export default function AddCustomer() {
 
   // shop type
   const [shopTypeList, setShopType] = useState(shopTypes);
-  const [selectedShopType, setSelectedShopTypeList] = useState<ChipItem[]>(
-    []
-  );
+  const [selectedShopType, setSelectedShopTypeList] = useState<ChipItem[]>([]);
 
   const [openCamera, setOpenCamera] = useState(false);
   const [openRecorder, setOpenRecorder] = useState(false);
@@ -111,25 +105,28 @@ export default function AddCustomer() {
   const [webcamImage, setWebcamImage] = useState<string | null | undefined>(
     null
   );
-  const [audio, setAudio] = useState<string | null | undefined>(
-    null
-  );
+  const [audio, setAudio] = useState<string | null | undefined>(null);
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const { salesPerson, name, mobile, email, line, province, district} = customer;
+    const { name, mobile, email, line, province, district } =
+      customer;
     const customerData: ICustomerToDB = {
-    interested_in: selectedInterestList.map((item) => item.name),
-    shop_type: selectedShopType.map((item) => item.name),
-    salesPerson, name, mobile, email, line, province, district,
-    image: webcamImage ? webcamImage : "",
-    audio: audio ? audio : "",
+      interested_in: selectedInterestList.map((item) => item.name),
+      shop_type: selectedShopType.map((item) => item.name),
+      salesPerson: user?.staffCode as string,
+      name,
+      mobile,
+      email,
+      line,
+      province,
+      district,
+      image: webcamImage ? webcamImage : "",
+      audio: audio ? audio : "",
     };
-    await addCustomer(customerData)
-    console.log("Floating button clicked", customerData);
+    await addCustomer(customerData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("e.target.id", e, e.currentTarget.id, e.target.value);
     setCustomer({ ...customer, [e.target.id]: e.target.value });
   };
 
@@ -158,14 +155,14 @@ export default function AddCustomer() {
   };
 
   return (
-    <div className="min-w-full min-h-screen px-1 py-10">
+    <div className="min-w-full min-h-screen px-1 py-10 pb-20">
       <h1 className="text-center text-2xl pb-5 uppercase">Add Customer</h1>
       <form action="" className="overflow-hidden p-6 space-y-10">
         {addCustomerFields.map(({ key, label }) => {
           if (key === "interested_in") {
             return (
               <div key={key} className="flex flex-col space-y-2">
-              <InputChipComponent
+                <InputChipComponent
                   list={interestList}
                   chips={selectedInterestList}
                   originalList={interests}
@@ -195,12 +192,13 @@ export default function AddCustomer() {
                     )}
                   </Menu>
                 </InputChipComponent>
-            </div>
-            )
-          } if (key === "shop_type") {
+              </div>
+            );
+          }
+          if (key === "shop_type") {
             return (
               <div key={key} className="flex flex-col space-y-2">
-              <InputChipComponent
+                <InputChipComponent
                   list={shopTypeList}
                   chips={selectedShopType}
                   originalList={shopTypes}
@@ -230,22 +228,21 @@ export default function AddCustomer() {
                     )}
                   </Menu>
                 </InputChipComponent>
-            </div>
-            )
+              </div>
+            );
           } else {
             return (
               <div key={key} className="flex flex-col space-y-2">
                 <FormInput
-                    value={customer[key] as string}
-                    label={label}
-                    key={key}
-                    name={key}
-                    onChange={handleChange}
-                  />
+                  value={customer[key]}
+                  label={label}
+                  key={key}
+                  name={key}
+                  onChange={handleChange}
+                />
               </div>
             );
           }
-         
         })}
         <ExpandableFloatingButton>
           <FloatingButton
