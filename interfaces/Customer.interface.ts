@@ -25,5 +25,6 @@ export interface ICustomerToDB {
     district?: string;
     image?: string;
     audio?: string;
+    source?: string;
 }
   

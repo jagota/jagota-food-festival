@@ -123,6 +123,7 @@ export default function AddCustomer() {
       district,
       image: webcamImage ? webcamImage : "",
       audio: audio ? audio : "",
+      source: "thaifex"
     };
     await addCustomer(customerData);
   };
