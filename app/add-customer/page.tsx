@@ -1,5 +1,4 @@
 "use client";
-import { PaperClipIcon } from "@heroicons/react/20/solid";
 import { WebCamComponent } from "@/components/webcam";
 import { useState } from "react";
 import { AudioRecorderComponent } from "@/components/audioRecorder";
@@ -14,6 +13,8 @@ import { FloatingButton } from "@/components/ui/floating-button";
 import { addCustomer } from "@/apihandler/customer.api";
 import { ICustomerToDB } from "@/interfaces/Customer.interface";
 import { useAuth } from "@/context/AuthContext";
+import { ImageViewer } from "@/components/ImageViewer";
+import { AudioPlayerComponent } from "@/components/audioPlayer";
 
 const addCustomerFields = [
   {
@@ -154,8 +155,18 @@ export default function AddCustomer() {
     });
   };
 
+  const handleAudioRemove = (e) => {
+    e.preventDefault();
+    setAudio(null);
+  }
+
+  const handleImageRemove = (e) => {
+    e.preventDefault();
+    setWebcamImage(null);
+  }
+
   return (
-    <div className="min-w-full min-h-screen px-1 py-10 pb-20">
+    <div className="min-w-full min-h-screen px-1 py-20">
       <h1 className="text-center text-2xl pb-5 uppercase">Add Customer</h1>
       <form action="" className="overflow-hidden p-6 space-y-10">
         {addCustomerFields.map(({ key, label }) => {
@@ -244,6 +255,28 @@ export default function AddCustomer() {
             );
           }
         })}
+        {webcamImage ? <div className="space-y-2">
+          <h4 className="text-left text-lg text-gray-400 font-lg">Image</h4>
+          <div className="flex flex-row justify-between items-center">
+          <ImageViewer imageUrl={webcamImage} /> 
+
+          <button 
+            className="bg-transparent text-red-500 border-0 outline-0"
+            onClick={handleImageRemove}
+            >remove</button>
+
+          </div>
+        </div> : null}
+        {audio ? <div className="space-y-2">
+          <h4 className="text-left text-lg text-gray-400 font-lg">Audio</h4>
+          <div className="flex flex-row justify-between items-center">
+            <AudioPlayerComponent url={audio} size="w-16 h-16" iconSize="w-6 h-6" buttonColor="border-gray-500" color="gray" />
+            <button 
+            className="bg-transparent text-red-500 border-0 outline-0"
+            onClick={handleAudioRemove}
+            >remove</button> 
+          </div>
+        </div> : null}
         <ExpandableFloatingButton>
           <FloatingButton
             contentType="audio"

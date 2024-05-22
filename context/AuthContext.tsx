@@ -37,11 +37,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       async () => await loginUser(data),
       setIsLoading,
       (res: any) => {
-        const { result, flag } = res;
+        const { result} = res;
         const data = result[0];
         console.log("login data", data, res);
-        LocalStorage.set("user", {name: "JBT04", staffCode: "jbtdev"})
-        if (flag === 1 || data) {
+        if (data) {
           const user = {name: data.NAME_E, staffCode: data.STAFF_CODE};
           setUser(user);
           LocalStorage.set("user", user);
