@@ -3,12 +3,13 @@ export interface FormInputProps extends React.InputHTMLAttributes<HTMLInputEleme
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value?: string
+    type?: string
   }
-export const FormInput = ({label, name, onChange, value}: FormInputProps) => {
+export const FormInput = ({label, name, onChange, value, type}: FormInputProps) => {
   return (
     <div className="outline outline-0 relative border-2 focus-within:border-blue-500">
       <input
-        type="text"
+        type={type}
         id={name}
         name={name}
         onChange={onChange}
@@ -22,6 +23,7 @@ export const FormInput = ({label, name, onChange, value}: FormInputProps) => {
       >
         {label}
       </label>
+      <p></p>
     </div>
   );
 };
