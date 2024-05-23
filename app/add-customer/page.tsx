@@ -302,20 +302,22 @@ export default function AddCustomer() {
             contentType="audio"
             color="bg-blue-500 hover:bg-blue-700"
             onClick={() => setOpenRecorder(true)}
-            classNames="absolute left-[20px]"
+            position="absolute left-[20px] w-20"
+            text="Record Audio"
           />
           <FloatingButton
             contentType="photo"
             color="bg-blue-500 hover:bg-blue-700"
             onClick={() => setOpenCamera(true)}
-            classNames="absolute left-[100px]"
+            position="absolute left-[120px] w-20"
+            text="Take Photo"
           />
         </ExpandableFloatingButton>
         <PrimaryButton
           onClick={handleClick}
           buttonText="Submit"
           variant="secondary"
-          classNames="w-full"
+          classNames="w-full mt-2"
         ></PrimaryButton>
       </form>
       {openCamera ? (
