@@ -22,14 +22,17 @@ const addCustomerFields = [
   {
     key: "email",
     label: "Email",
+    type: "email",
   },
   {
     key: "name",
     label: "Name",
+    type: "text",
   },
   {
     key: "mobile",
     label: "Mobile",
+    type: "tel",
   },
   {
     key: "line",
@@ -184,7 +187,7 @@ export default function AddCustomer() {
     <div className="min-w-full min-h-screen px-1 py-20">
       <h1 className="text-center text-2xl pb-5 uppercase">Add Customer</h1>
       <form action="" className="overflow-hidden p-6 space-y-10">
-        {addCustomerFields.map(({ key, label }) => {
+        {addCustomerFields.map(({ key, label, type }) => {
           if (key === "interested_in") {
             return (
               <div key={key} className="flex flex-col space-y-2">
@@ -265,6 +268,7 @@ export default function AddCustomer() {
                   key={key}
                   name={key}
                   onChange={handleChange}
+                  type={type}
                 />
               </div>
             );
