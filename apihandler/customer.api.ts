@@ -30,4 +30,14 @@ const addCustomer = async (customerData: ICustomerToDB): Promise<ICreateCustomer
     return {error: true, message: data.message};
 }
 
-export { addCustomer, runtime }
+const getCustomers = async (salesPerson: string): Promise<IGetCustomerResponse> => {
+    const res = await apiClient.get(`/customers?salesPerson=${salesPerson}`)
+    const { data } = res;
+    console.log("data", data);
+    if (data.success) {
+        return {error: false, data: data.data, message: "success"};
+    }
+    return {error: true, message: data.message};
+}
+
+export { addCustomer, getCustomers, runtime }
