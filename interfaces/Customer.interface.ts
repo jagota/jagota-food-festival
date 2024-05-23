@@ -11,6 +11,7 @@ export interface CustomerInterface {
     district: string;
     image: string;
     audio: string;
+    source: string;
 }
 
 export interface ICustomerToDB {

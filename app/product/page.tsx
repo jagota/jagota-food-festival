@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ProductList } from './_product/ProductList';
 
 export default function Home() {
-    const router = useRouter()
+    const router = useRouter();
     const handleClick = () => {
         router.push('/add-customer');
     }

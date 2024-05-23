@@ -15,6 +15,8 @@ import { ICustomerToDB } from "@/interfaces/Customer.interface";
 import { useAuth } from "@/context/AuthContext";
 import { ImageViewer } from "@/components/ImageViewer";
 import { AudioPlayerComponent } from "@/components/audioPlayer";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 const addCustomerFields = [
   {
@@ -90,6 +92,7 @@ const initialCustomerState: Omit<ICustomerToDB, "salesPerson"> = {
 
 export default function AddCustomer() {
   const { user } = useAuth();
+  const router = useRouter()
   // interest
   const [interestList, setInterestList] = useState(interests);
   const [selectedInterestList, setSelectedInterestList] = useState<ChipItem[]>(
@@ -125,7 +128,18 @@ export default function AddCustomer() {
       audio: audio ? audio : "",
       source: "thaifex"
     };
-    await addCustomer(customerData);
+    const addCustomerRes = await addCustomer(customerData);
+    if (addCustomerRes.error === false) {
+      Swal.fire({
+        title: "Customer Added Successfully!",
+        confirmButtonText: "OK",
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          router.push('/customers');
+        }
+      });
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
