@@ -4,36 +4,38 @@ import Link from "next/link";
 import { iconType, Icon } from "./Icon";
 
 const links: {
-  text: string,
-  link: string,
-  icon: iconType
+  text: string;
+  link: string;
+  icon: iconType;
 }[] = [
-    {
-        text: 'Product',
-        link: '/product',
-        icon: "product"
-    },
-    {
-        text: 'Add Customer',
-        link: '/add-customer',
-        icon: 'add-people'
-    },
-    {
-        text: 'Customers',
-        link: '/customers',
-        icon: 'people'
-    }
-]
+  {
+    text: "Home",
+    link: "/",
+    icon: "home",
+  },
+  {
+    text: "Catalogue",
+    link: "/product",
+    icon: "product",
+  },
+  {
+    text: "Quick Links",
+    link: "/add-customer",
+    icon: "add-people",
+  },
+  {
+    text: "Contacts",
+    link: "/customers",
+    icon: "people",
+  },
+];
 export const Footer = () => {
   const { user, logout } = useAuth();
   if (!user) return null;
 
-
   const renderIcon = (icon: iconType) => {
-    return (
-        <Icon contentType={icon} />
-    )
-  }
+    return <Icon contentType={icon} />;
+  };
 
   const renderItem = (item: any) => {
     return (

@@ -20,14 +20,22 @@ import { useRouter } from "next/navigation";
 
 const addCustomerFields = [
   {
+    key: "name",
+    label: "Contact Person",
+    type: "text",
+  },
+  {
+    key: "province",
+    label: "Province",
+  },
+  {
+    key: "district",
+    label: "District",
+  },
+  {
     key: "email",
     label: "Email",
     type: "email",
-  },
-  {
-    key: "name",
-    label: "Name",
-    type: "text",
   },
   {
     key: "mobile",
@@ -38,14 +46,7 @@ const addCustomerFields = [
     key: "line",
     label: "Line",
   },
-  {
-    key: "province",
-    label: "Province",
-  },
-  {
-    key: "district",
-    label: "District",
-  },
+  
   {
     key: "interested_in",
     label: "Interested In",
