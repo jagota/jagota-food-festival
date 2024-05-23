@@ -1,7 +1,7 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { iconType, Icon } from "./icon";
+import { iconType, Icon } from "./Icon";
 
 const links: {
   text: string,

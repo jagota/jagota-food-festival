@@ -80,7 +80,7 @@ const shopTypes: ChipItem[] = [
   { id: 9, name: "Food" },
 ];
 
-const initialCustomerState: Omit<ICustomerToDB, "salesPerson"> = {
+const initialCustomerState: ICustomerToDB = {
   interested_in: [],
   shop_type: [],
   name: "",
@@ -91,6 +91,7 @@ const initialCustomerState: Omit<ICustomerToDB, "salesPerson"> = {
   district: "",
   image: "",
   audio: "",
+  salesPerson: ""
 };
 
 export default function AddCustomer() {
@@ -108,13 +109,12 @@ export default function AddCustomer() {
 
   const [openCamera, setOpenCamera] = useState(false);
   const [openRecorder, setOpenRecorder] = useState(false);
-  const [customer, setCustomer] = useState(initialCustomerState);
+  const [customer, setCustomer] = useState<Record<string, string>>({});
   const [webcamImage, setWebcamImage] = useState<string | null | undefined>(
     null
   );
   const [audio, setAudio] = useState<string | null | undefined>(null);
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const handleClick = async () => {
     const { name, mobile, email, line, province, district } =
       customer;
     const customerData: ICustomerToDB = {
@@ -173,12 +173,12 @@ export default function AddCustomer() {
     });
   };
 
-  const handleAudioRemove = (e) => {
+  const handleAudioRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setAudio(null);
   }
 
-  const handleImageRemove = (e) => {
+  const handleImageRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setWebcamImage(null);
   }
@@ -311,7 +311,7 @@ export default function AddCustomer() {
           />
         </ExpandableFloatingButton>
         <PrimaryButton
-          onClick={(e) => handleClick(e)}
+          onClick={handleClick}
           buttonText="Submit"
           variant="secondary"
           classNames="w-full"

@@ -6,7 +6,7 @@ export const Header = () => {
     const { user, logout } = useAuth();
     if (!user)  return null;
 
-    const handleClick = (e) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         logout();
         console.log('clicked', user);

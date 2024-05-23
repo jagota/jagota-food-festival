@@ -27,8 +27,14 @@ const classes = {
 }
 
 const PrimaryButton = ({ onClick, buttonText, variant = "primary", classNames = '' }: ButtonProps) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (onClick) {
+      onClick();
+    }
+  }
   return (
-    <button onClick={onClick} className={classes.button(variant, classNames)}>
+    <button onClick={handleClick} className={classes.button(variant, classNames)}>
         <span className={classes.buttonText(variant)}>
             {buttonText}
         </span>
