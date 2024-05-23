@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <div className='min-w-screen min-h-screen bg-gray-100 py-20'>
       <ProductList />
-      <FloatingButton contentType="plus" classNames='fixed bottom-20 right-10' onClick={handleClick} />
+      <FloatingButton contentType="plus" position='fixed bottom-20 right-10' onClick={handleClick} />
     </div>
   );
 }
