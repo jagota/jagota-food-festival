@@ -22,7 +22,7 @@ export const ProductList = () => {
     
     return (
         <div className='container mx-auto'>
-            <div className='grid lg:grid-cols-3 xl:grid-cols-3 gap-[2rem] md:grid-cols-2 grid-cols-1'>
+            <div className='grid lg:grid-cols-4 xl:grid-cols-4 gap-[2rem] md:grid-cols-2 grid-cols-2'>
             {products && products.map((item, index) => {
                 return <ProductItem key={index} product={item}/>
             })}
