@@ -26,7 +26,6 @@ const EventProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const _event = LocalStorage.get("selectedEvent");
-    console.log("user", _event)
     if (_event) {
       setSelectedEvent(_event);
     }

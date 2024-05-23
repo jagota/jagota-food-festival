@@ -3,11 +3,12 @@ import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { iconType, Icon } from "./Icon";
 
-const links: {
+type linkType = {
   text: string;
   link: string;
   icon: iconType;
-}[] = [
+}
+const links: linkType[] = [
   {
     text: "Home",
     link: "/",
@@ -37,9 +38,9 @@ export const Footer = () => {
     return <Icon contentType={icon} />;
   };
 
-  const renderItem = (item: any) => {
+  const renderItem = (item: linkType) => {
     return (
-      <div className="flex-1 group">
+      <div key={item.text} className="flex-1 group">
         <Link
           href={item.link}
           className="inline-block text-center mx-auto px-4 py-2 w-full text-gray-400 group-hover:text-blue-500"

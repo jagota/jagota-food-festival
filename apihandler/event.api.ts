@@ -16,7 +16,6 @@ interface IGetEventResponse {
 const getEvent = async (): Promise<IGetEventResponse> => {
     const res = await apiClient.get(`/events/get-event`)
     const { data } = res;
-    console.log("data", data);
     if (data.success) {
         return {error: false, data: data.data, message: "success"};
     }

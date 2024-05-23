@@ -10,7 +10,6 @@ export const EventList = () => {
     useEffect(() => {
         async function fetchEvent() { 
             const res = await getEvent();
-            console.log("events", res);
             if (!res.error) {
                 setEvents(res.data || []);
             }
