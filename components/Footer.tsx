@@ -1,43 +1,46 @@
 "use client";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
-import { iconType, Icon } from "./icon";
+import { iconType, Icon } from "./Icon";
 
-const links: {
-  text: string,
-  link: string,
-  icon: iconType
-}[] = [
-    {
-        text: 'Product',
-        link: '/product',
-        icon: "product"
-    },
-    {
-        text: 'Add Customer',
-        link: '/add-customer',
-        icon: 'add-people'
-    },
-    {
-        text: 'Customers',
-        link: '/customers',
-        icon: 'people'
-    }
-]
+type linkType = {
+  text: string;
+  link: string;
+  icon: iconType;
+}
+const links: linkType[] = [
+  {
+    text: "Home",
+    link: "/",
+    icon: "home",
+  },
+  {
+    text: "Catalogue",
+    link: "/product",
+    icon: "product",
+  },
+  {
+    text: "Quick Links",
+    link: "/add-customer",
+    icon: "add-people",
+  },
+  {
+    text: "Contacts",
+    link: "/customers",
+    icon: "people",
+  },
+];
 export const Footer = () => {
   const { user, logout } = useAuth();
   if (!user) return null;
 
-
   const renderIcon = (icon: iconType) => {
-    return (
-        <Icon contentType={icon} />
-    )
-  }
+    return <Icon contentType={icon} />;
+  };
 
-  const renderItem = (item: any) => {
+  const renderItem = (item: linkType) => {
     return (
-      <div className="flex-1 group">
+      <div key={item.text} className="flex-1 group">
         <Link
           href={item.link}
           className="inline-block text-center mx-auto px-4 py-2 w-full text-gray-400 group-hover:text-blue-500"

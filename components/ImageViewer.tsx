@@ -2,7 +2,7 @@
 
 import cntl from "cntl";
 import { useState } from "react";
-import { Icon } from "./icon";
+import { Icon } from "./Icon";
 
 interface ImageViewerProps {
   imageUrl: string;

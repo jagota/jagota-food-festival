@@ -55,7 +55,7 @@ export const AudioPlayerComponent = ({ url, size, color, iconSize, buttonColor }
     setPlaying(false);
   };
 
-  const handleClick = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (isPlaying) {
       pause();

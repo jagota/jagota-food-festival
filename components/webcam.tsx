@@ -17,7 +17,6 @@ const WebCamComponent = ({ onClose, onSave }: IWebCamComponentProps) => {
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef?.current?.getScreenshot();
-    console.log("imageSrc", imageSrc);
     setImg(imageSrc);
   }, [webcamRef]);
 

@@ -26,7 +26,7 @@ const useAuth = () => useContext(AuthContext);
 const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState<SalesPersonInterface | null>(null);
 
   const router = useRouter()
@@ -44,7 +44,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           const user = {name: data.NAME_E, staffCode: data.STAFF_CODE};
           setUser(user);
           LocalStorage.set("user", user);
-          router.replace("/product") // Redirect to the chat page after successful login
+          router.replace("/") // Redirect to the home page after successful login
         } else {
           alert("wrong credential")
         }
