@@ -9,7 +9,6 @@ export const Header = () => {
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         logout();
-        console.log('clicked', user);
     }
     return (
         <div className="min-w-full bg-white px-5 shadow-lg fixed top-0 min-h-[60px] z-10">
