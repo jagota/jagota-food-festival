@@ -3,4 +3,6 @@ export interface IEvent {
     name: string;
     fromDate: Date;
     toDate: Date;
+    thumbnail: string;
+    orderBy: number;
 }
