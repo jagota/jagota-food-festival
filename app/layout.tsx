@@ -10,7 +10,7 @@ import { CustomerTypeProvider } from "@/context/CustomerTypeContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Jagota Food",
+  title: "Jagota Events",
   description: "Jagota Food festival",
 };
 

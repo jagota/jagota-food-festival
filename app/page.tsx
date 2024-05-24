@@ -22,14 +22,14 @@ export default function Home() {
       <FloatingButton
             contentType="plus"
             color="bg-blue-500 hover:bg-blue-700"
-            onClick={() => selectCustomerType("customer")}
+            onClick={() => {selectCustomerType("customer");router.push("/add-customer");}}
             position="fixed bottom-20 left-10 w-20"
             text="Customer"
           />
           <FloatingButton
             contentType="plus"
             color="bg-cyan-700 hover:bg-cyan-500"
-            onClick={() => selectCustomerType("supplier")}
+            onClick={() => {selectCustomerType("supplier");router.push("/add-customer");}}
             position="fixed bottom-20 right-10 w-20"
             text="Supplier"
           />

@@ -1,1 +1,1 @@
-export type ChipItem = { name: string, id: number | string}
+export type ChipItem = { name: string, id: number | string, image?: string}

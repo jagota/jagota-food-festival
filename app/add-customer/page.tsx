@@ -17,6 +17,8 @@ import { ImageViewer } from "@/components/ImageViewer";
 import { AudioPlayerComponent } from "@/components/audioPlayer";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { useCustomerType } from "@/context/CustomerTypeContext";
+import { images } from "@/constants/images";
 
 const addCustomerFields = [
   {
@@ -58,27 +60,31 @@ const addCustomerFields = [
 ];
 
 const interests: ChipItem[] = [
-  { id: 1, name: "Shoes" },
-  { id: 2, name: "Clothes" },
-  { id: 3, name: "Bags" },
-  { id: 4, name: "Accessories" },
-  { id: 5, name: "Others" },
-  { id: 6, name: "Toys" },
-  { id: 7, name: "Electronics" },
-  { id: 8, name: "Furniture" },
-  { id: 9, name: "Food" },
+  { id: 1, name: "Meat", image: images.interests.meet },
+  { id: 2, name: "Seafood", image: images.interests.seafood},
+  { id: 3, name: "Dairy & Non Dairy", image: images.interests.dairy },
+  { id: 4, name: "Western Gourmet", image: images.interests.western},
+  { id: 5, name: "Japanesh Ingradients", image: images.interests.japanese},
+  { id: 6, name: "Bakery", image: images.interests.bakery },
+  { id: 7, name: "Frozen Bakery", image: images.interests.frozenBakery },
+  { id: 8, name: "Fruits, Nuts, Vegitables", image: images.interests.fruit},
+  { id: 9, name: "Frozen Snacks", image: images.interests.frozenSnacks},
+  { id: 10, name: "Beverage", image: images.interests.beverage},
+  { id: 11, name: "Ice Cream" , image: images.interests.iceCream},
+  { id: 12, name: "Snacks", image: images.interests.snacks },
+  { id: 13, name: "Non-Food" , image: images.interests.nonFood},
 ];
 
 const shopTypes: ChipItem[] = [
-  { id: 1, name: "Shoes" },
-  { id: 2, name: "Clothes" },
-  { id: 3, name: "Bags" },
-  { id: 4, name: "Accessories" },
-  { id: 5, name: "Others" },
-  { id: 6, name: "Toys" },
-  { id: 7, name: "Electronics" },
-  { id: 8, name: "Furniture" },
-  { id: 9, name: "Food" },
+  { id: 1, name: "Coffee shop" },
+  { id: 2, name: "Dry Food" },
+  { id: 3, name: "Food Court" },
+  { id: 4, name: "French" },
+  { id: 5, name: "Frozen Food Distributor" },
+  { id: 6, name: "German" },
+  { id: 7, name: "Hotel - 3 star" },
+  { id: 8, name: "Hotel - 4 star" },
+  { id: 9, name: "Hotel - 5 star" },
 ];
 
 const initialCustomerState: ICustomerToDB = {
@@ -97,6 +103,7 @@ const initialCustomerState: ICustomerToDB = {
 
 export default function AddCustomer() {
   const { user } = useAuth();
+  const { selectedCustomerType } = useCustomerType();
   const router = useRouter()
   // interest
   const [interestList, setInterestList] = useState(interests);
@@ -186,7 +193,8 @@ export default function AddCustomer() {
 
   return (
     <div className="min-w-full min-h-screen px-1 py-20">
-      <h1 className="text-center text-2xl pb-5 uppercase">Add Customer</h1>
+      <h1 className="text-left text-2xl pb-5 uppercase pl-[20px]">{`${selectedCustomerType} Information`}</h1>
+      <h3 className="text-left text-xl pl-[20px]">{`Let's Connect and Grow Together`}</h3>
       <form action="" className="overflow-hidden p-6 space-y-10">
         {addCustomerFields.map(({ key, label, type }) => {
           if (key === "interested_in") {
@@ -235,11 +243,11 @@ export default function AddCustomer() {
                   labelUnique="id"
                   handleList={setShopType}
                   // @ts-ignore
-                  handleChip={setSelectedInterestList}
+                  handleChip={setSelectedShopTypeList}
                   placeholder={label}
                 >
                   <Menu>
-                    {interests.map((user) => {
+                    {shopTypes.map((user) => {
                       return (
                         <MenuItem
                           key={user.id}
@@ -253,7 +261,7 @@ export default function AddCustomer() {
                         </MenuItem>
                       );
                     })}
-                    {interests.length === 0 && (
+                    {shopTypes.length === 0 && (
                       <div className="p-4">Not Available</div>
                     )}
                   </Menu>
