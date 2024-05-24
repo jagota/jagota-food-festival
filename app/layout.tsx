@@ -5,6 +5,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { EventProvider } from "@/context/EventContext";
+import { CustomerTypeProvider } from "@/context/CustomerTypeContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,14 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <EventProvider>
-          <Header />
-          {children}
-          <Footer />
+            <CustomerTypeProvider>
+              <Header />
+              {children}
+              <Footer />
+            </CustomerTypeProvider>
           </EventProvider>
-        
         </AuthProvider>
-        </body>
+      </body>
     </html>
   );
 }

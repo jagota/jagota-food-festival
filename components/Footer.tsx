@@ -16,13 +16,13 @@ const links: linkType[] = [
   },
   {
     text: "Catalogue",
-    link: "/product",
+    link: "https://www.jagota.com/catalogue2024/",
     icon: "product",
   },
   {
     text: "Quick Links",
-    link: "/add-customer",
-    icon: "add-people",
+    link: "/quick-links",
+    icon: "link",
   },
   {
     text: "Contacts",

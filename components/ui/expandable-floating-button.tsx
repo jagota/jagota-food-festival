@@ -46,7 +46,7 @@ export const ExpandableFloatingButton = ({ children}: ButtonProps) => {
   };
   return (
     <div className="relative h-10">
-      <FloatingButton color={open ? "bg-red-500 hover:bg-red-700" : "bg-blue-500 hover:bg-blue-700"} contentType={open ? "close" : "plus"} onClick={handleClick} classNames="absolute left-0" />
+      <FloatingButton color={open ? "bg-red-500 hover:bg-red-700" : "bg-blue-500 hover:bg-blue-700"} contentType={open ? "close" : "plus"} onClick={handleClick} position="absolute left-0" />
       <div className={classes.expandableArea(open)}>
        {children}
       </div>
