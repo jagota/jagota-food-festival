@@ -16,7 +16,7 @@ const links: linkType[] = [
   },
   {
     text: "Catalogue",
-    link: "/product",
+    link: "https://www.jagota.com/catalogue2024/",
     icon: "product",
   },
   {

@@ -1,19 +1,23 @@
-'use client'
- 
-import { useRouter } from 'next/navigation'
+"use client";
+
 import { FloatingButton } from "@/components/ui/floating-button";
-import Image from "next/image";
-import { ProductList } from './_product/ProductList';
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-    const router = useRouter();
-    const handleClick = () => {
-        router.push('/add-customer');
+  const router = useRouter();
+  useEffect(() => {
+    function redirectToJagota() {
+      router.push("https://www.jagota.com/catalogue2024/");
     }
+    redirectToJagota();
+  }, []);
+  const handleClick = () => {
+    router.push("https://www.jagota.com/catalogue2024/");
+  }
   return (
-    <div className='min-w-screen min-h-screen bg-gray-100 py-20'>
-      <ProductList />
-      <FloatingButton contentType="plus" position='fixed bottom-20 right-10' onClick={handleClick} />
+    <div className="min-w-screen min-h-screen flex justify-center items-center bg-gray-100 py-20">
+      <FloatingButton contentType="plus" position='relative' onClick={handleClick} />
     </div>
   );
 }
