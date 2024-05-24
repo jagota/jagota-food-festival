@@ -19,7 +19,7 @@ export const EventList = () => {
     
     return (
         <div className='container mx-auto'>
-            <div className='grid lg:grid-cols-4 xl:grid-cols-4 gap-[2rem] md:grid-cols-2 grid-cols-2'>
+            <div className='grid lg:grid-cols-4 xl:grid-cols-4 gap-[2rem] md:grid-cols-2 grid-cols-1'>
             {events && events.map((item, index) => {
                 return <EventListItem key={index} event={item}/>
             })}

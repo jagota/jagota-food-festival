@@ -1,6 +1,6 @@
 import * as React from "react";
 import cntl from "cntl";
-import { HiMiniLink } from "react-icons/hi2";
+import { HiMiniLink, HiMiniXMark } from "react-icons/hi2";
 
 const classes = {
   icon: (classNames?: string, size?: string) => cntl`
@@ -10,7 +10,7 @@ const classes = {
   `,
 };
 
-export type iconType = "product" | "link" | "home" | "people" | "add-people" | "close";
+export type iconType = "product" | "link" | "close-circle" | "home" | "people" | "add-people" | "close";
 
 export interface IconProps {
   contentType?: iconType;
@@ -33,7 +33,11 @@ const Icon = ({
     case "link":
       return (<HiMiniLink className={classes.icon(classNames, size)}
       />)
-    case "close":
+    case "close": 
+      return (
+        <HiMiniXMark className={classes.icon(classNames, size)} />
+      )
+    case "close-circle":
       return (
         <svg
           xmlns="http://www.w3.org/2000/svg"
