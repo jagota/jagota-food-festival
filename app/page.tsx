@@ -5,6 +5,8 @@ import { useAuth } from '@/context/AuthContext';
 import { EventList } from './_home/EventList';
 import { FloatingButton } from '@/components/ui/floating-button';
 import { useCustomerType } from '@/context/CustomerTypeContext';
+import { Header } from '@/components/Header';
+import { SearchBar } from '@/components/SearchBar';
 
 export default function Home() {
   const { user } = useAuth();
@@ -17,7 +19,9 @@ export default function Home() {
     }
   }, [user]);
   return (
-    <div className="min-w-screen min-h-screen bg-gray-100 py-20">
+    <div className="min-w-screen min-h-screen bg-white px-4 pt-4 pb-20">
+      <Header />
+      <SearchBar />
       <EventList />
       <FloatingButton
             contentType="plus"

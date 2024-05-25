@@ -41,7 +41,14 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         const data = result[0];
         console.log("login data", data, res);
         if (data) {
-          const user = {name: data.NAME_E, staffCode: data.STAFF_CODE};
+          const user = {
+            name: data.NAME_E, 
+            staffCode: data.STAFF_CODE, 
+            profilePic: data.STAFF_IMAGE,
+            dName: data.DNAME,
+            email: data.EMAIL,
+            mobile: data.MOBILE,
+          };
           setUser(user);
           LocalStorage.set("user", user);
           router.replace("/") // Redirect to the home page after successful login

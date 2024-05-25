@@ -2,19 +2,21 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useEvent } from "@/context/EventContext";
 import { IEvent } from "@/interfaces/Event.interface";
 import cntl from 'cntl';
+import Image from "next/image";
+
+const bgColors: { [key: string]: string } = {
+    '1':'bg-[#ED1D26]',
+    '2': 'bg-blue-500'
+}
 
 const classes = {
-    card: (isSelected: boolean) => cntl`
+    card: (isSelected: boolean, bgColor?: string) => cntl`
         cursor-pointer
-        border-2
-        border-gray-200
-        hover:border-blue-400
-        bg-gray-200
-        rounded-md
-        w-[95%] h-24 m-auto
-        rounded-[10px]
-        flex flex-col justify-center items-center
-        ${isSelected ? 'bg-blue-500' : ''}
+        w-full h-48 m-auto
+        rounded-[10px] relative
+        flex flex-row justify-center items-center
+        ${isSelected ? 'bg-[#ED1D26]' : ''}
+        ${bgColor ? bgColor : ''}
     `,
     selected: cntl`
         border-blue-500
@@ -26,14 +28,20 @@ interface Props {
   }
 export const EventListItem = ({ event}: Props) => {
     const {selectEvent, selectedEvent} = useEvent();
-    const isSelected = selectedEvent === event.code;
+    const isSelected = selectedEvent?.code === event.code;
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
-        selectEvent(isSelected ? null : event.code);
+        selectEvent(event);
     }
     return (
-        <Card className={classes.card(isSelected)} onClick={handleClick}>
-            <p className={isSelected ? "text-white text-2xl" : "text-black text-2xl"}>{event.name}</p>
+        <Card className={classes.card(isSelected, bgColors[event.code] )} onClick={handleClick}>
+            <div className="flex-1 flex justify-center items-center">
+                   {event.thumbnail ? <Image src={event.thumbnail} width={140} height={140} alt={event.name} /> : null}
+            </div>
+            <div className="flex-1">
+                <p className="absolute right-5 bottom-10 text-white">{event.name}</p>
+            </div>
+            {/* <p className={isSelected ? "text-white text-2xl" : "text-black text-2xl"}>{event.name}</p> */}
         </Card>
     )
 }

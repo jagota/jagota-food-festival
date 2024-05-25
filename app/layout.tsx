@@ -25,7 +25,6 @@ export default function RootLayout({
         <AuthProvider>
           <EventProvider>
             <CustomerTypeProvider>
-              <Header />
               {children}
               <Footer />
             </CustomerTypeProvider>
