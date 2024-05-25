@@ -2,28 +2,29 @@ export interface FormInputProps extends React.InputHTMLAttributes<HTMLInputEleme
     label: string;
     name: string;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value?: string
-    type?: string
+    value?: string;
+    type?: string;
+    children?: React.ReactNode;
   }
-export const FormInput = ({label, name, onChange, value, type}: FormInputProps) => {
+export const FormInput = ({label, name, onChange, value, type, children}: FormInputProps) => {
   return (
-    <div className="outline outline-0 relative border-2 focus-within:border-blue-500">
+    <div className="outline outline-0 relative border border-[#1A3860]/10 focus-within:border-[#006CFA]/76">
       <input
         type={type}
         id={name}
         name={name}
         onChange={onChange}
-        placeholder=" "
+        placeholder=""
         value={value}
-        className="block p-2 w-full text-base appearance-none focus:outline-none bg-transparent"
+        className="block h-[52px] py-2.5 pl-3 pr-12 w-full text-lg text-[#192739]/94 appearance-none focus:outline-none bg-transparent"
       />
       <label
         htmlFor={name}
-        className="absolute top-0 text-base bg-white p-2 -z-1 duration-300 origin-0"
+        className="absolute top-0 text-lg text-[#1C304A]/52 bg-white py-2.5 pl-3 z-1 duration-300 origin-0"
       >
         {label}
       </label>
-      <p></p>
+      {children ? children : null}
     </div>
   );
 };

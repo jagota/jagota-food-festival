@@ -19,6 +19,12 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useCustomerType } from "@/context/CustomerTypeContext";
 import { images } from "@/constants/images";
+import { AboutSection } from "./_components/AboutSection";
+import { ContactSection } from "./_components/ContactSection";
+import { LocationSection } from "./_components/LocationSection";
+import { InterestSection } from "./_components/InterestSection";
+import { CustomerForm } from "./_components/CustomerForm";
+import { CustomerFormProvider } from "./_components/context/CustomerContext";
 
 const addCustomerFields = [
   {
@@ -59,22 +65,6 @@ const addCustomerFields = [
   },
 ];
 
-const interests: ChipItem[] = [
-  { id: 1, name: "Meat", image: images.interests.meet },
-  { id: 2, name: "Seafood", image: images.interests.seafood},
-  { id: 3, name: "Dairy & Non Dairy", image: images.interests.dairy },
-  { id: 4, name: "Western Gourmet", image: images.interests.western},
-  { id: 5, name: "Japanesh Ingradients", image: images.interests.japanese},
-  { id: 6, name: "Bakery", image: images.interests.bakery },
-  { id: 7, name: "Frozen Bakery", image: images.interests.frozenBakery },
-  { id: 8, name: "Fruits, Nuts, Vegitables", image: images.interests.fruit},
-  { id: 9, name: "Frozen Snacks", image: images.interests.frozenSnacks},
-  { id: 10, name: "Beverage", image: images.interests.beverage},
-  { id: 11, name: "Ice Cream" , image: images.interests.iceCream},
-  { id: 12, name: "Snacks", image: images.interests.snacks },
-  { id: 13, name: "Non-Food" , image: images.interests.nonFood},
-];
-
 const shopTypes: ChipItem[] = [
   { id: 1, name: "Coffee shop" },
   { id: 2, name: "Dry Food" },
@@ -87,262 +77,263 @@ const shopTypes: ChipItem[] = [
   { id: 9, name: "Hotel - 5 star" },
 ];
 
-const initialCustomerState: ICustomerToDB = {
-  interested_in: [],
-  shop_type: [],
-  name: "",
-  mobile: "",
-  email: "",
-  line: "",
-  province: "",
-  district: "",
-  image: "",
-  audio: "",
-  salesPerson: ""
-};
-
 export default function AddCustomer() {
-  const { user } = useAuth();
-  const { selectedCustomerType } = useCustomerType();
-  const router = useRouter()
-  // interest
-  const [interestList, setInterestList] = useState(interests);
-  const [selectedInterestList, setSelectedInterestList] = useState<ChipItem[]>(
-    []
-  );
+  const [devMode, setDevMode] = useState(true)
+  // const { user } = useAuth();
+  // const { selectedCustomerType } = useCustomerType();
+  // const router = useRouter()
+  // // interest
+  // const [interestList, setInterestList] = useState(interests);
+  // const [selectedInterestList, setSelectedInterestList] = useState<ChipItem[]>(
+  //   []
+  // );
 
-  // shop type
-  const [shopTypeList, setShopType] = useState(shopTypes);
-  const [selectedShopType, setSelectedShopTypeList] = useState<ChipItem[]>([]);
+  // // shop type
+  // const [shopTypeList, setShopType] = useState(shopTypes);
+  // const [selectedShopType, setSelectedShopTypeList] = useState<ChipItem[]>([]);
 
-  const [openCamera, setOpenCamera] = useState(false);
-  const [openRecorder, setOpenRecorder] = useState(false);
-  const [customer, setCustomer] = useState<Record<string, string>>({});
-  const [webcamImage, setWebcamImage] = useState<string | null | undefined>(
-    null
-  );
-  const [audio, setAudio] = useState<string | null | undefined>(null);
-  const handleClick = async () => {
-    const { name, mobile, email, line, province, district } =
-      customer;
-    const customerData: ICustomerToDB = {
-      interested_in: selectedInterestList.map((item) => item.name),
-      shop_type: selectedShopType.map((item) => item.name),
-      salesPerson: user?.staffCode as string,
-      name,
-      mobile,
-      email,
-      line,
-      province,
-      district,
-      image: webcamImage ? webcamImage : "",
-      audio: audio ? audio : "",
-      source: "thaifex"
-    };
-    const addCustomerRes = await addCustomer(customerData);
-    if (addCustomerRes.error === false) {
-      Swal.fire({
-        title: "Customer Added Successfully!",
-        confirmButtonText: "OK",
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          router.push('/customers');
-        }
-      });
-    }
-  };
+  // const [openCamera, setOpenCamera] = useState(false);
+  // const [openRecorder, setOpenRecorder] = useState(false);
+  // const [customer, setCustomer] = useState<Record<string, string>>({});
+  // const [webcamImage, setWebcamImage] = useState<string | null | undefined>(
+  //   null
+  // );
+  // const [audio, setAudio] = useState<string | null | undefined>(null);
+  // const handleClick = async () => {
+  //   const { name, mobile, email, line, province, district } =
+  //     customer;
+  //   const customerData: ICustomerToDB = {
+  //     interested_in: selectedInterestList.map((item) => item.name),
+  //     shop_type: selectedShopType.map((item) => item.name),
+  //     salesPerson: user?.staffCode as string,
+  //     name,
+  //     mobile,
+  //     email,
+  //     line,
+  //     province,
+  //     district,
+  //     image: webcamImage ? webcamImage : "",
+  //     audio: audio ? audio : "",
+  //     source: "thaifex"
+  //   };
+  //   const addCustomerRes = await addCustomer(customerData);
+  //   if (addCustomerRes.error === false) {
+  //     Swal.fire({
+  //       title: "Customer Added Successfully!",
+  //       confirmButtonText: "OK",
+  //     }).then((result) => {
+  //       /* Read more about isConfirmed, isDenied below */
+  //       if (result.isConfirmed) {
+  //         router.push('/customers');
+  //       }
+  //     });
+  //   }
+  // };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCustomer({ ...customer, [e.target.id]: e.target.value });
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setCustomer({ ...customer, [e.target.id]: e.target.value });
+  // };
 
-  const handleInterestMenuItem = (selectedUser: ChipItem) => {
-    setSelectedInterestList((prevUserList) => {
-      return prevUserList.filter((user) => {
-        return selectedUser.id !== user.id;
-      });
-    });
-    // @ts-ignore
-    setSelectedInterestList((prevSelectedUserList) => {
-      return [...prevSelectedUserList, selectedUser];
-    });
-  };
+  // const handleInterestMenuItem = (selectedUser: ChipItem) => {
+  //   setSelectedInterestList((prevUserList) => {
+  //     return prevUserList.filter((user) => {
+  //       return selectedUser.id !== user.id;
+  //     });
+  //   });
+  //   // @ts-ignore
+  //   setSelectedInterestList((prevSelectedUserList) => {
+  //     return [...prevSelectedUserList, selectedUser];
+  //   });
+  // };
 
-  const handleShopTypeMenuItem = (selectedUser: ChipItem) => {
-    setSelectedShopTypeList((prevUserList) => {
-      return prevUserList.filter((user) => {
-        return selectedUser.id !== user.id;
-      });
-    });
-    // @ts-ignore
-    setSelectedShopTypeList((prevSelectedUserList) => {
-      return [...prevSelectedUserList, selectedUser];
-    });
-  };
+  // const handleShopTypeMenuItem = (selectedUser: ChipItem) => {
+  //   setSelectedShopTypeList((prevUserList) => {
+  //     return prevUserList.filter((user) => {
+  //       return selectedUser.id !== user.id;
+  //     });
+  //   });
+  //   // @ts-ignore
+  //   setSelectedShopTypeList((prevSelectedUserList) => {
+  //     return [...prevSelectedUserList, selectedUser];
+  //   });
+  // };
 
-  const handleAudioRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setAudio(null);
+  // const handleAudioRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   setAudio(null);
+  // }
+
+  // const handleImageRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
+  //   e.preventDefault();
+  //   setWebcamImage(null);
+  // }
+
+  if (devMode) {
+    return (
+      <CustomerFormProvider>
+              <CustomerForm />
+      </CustomerFormProvider>
+    )
   }
 
-  const handleImageRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setWebcamImage(null);
-  }
+  return null;
 
-  return (
-    <div className="min-w-full min-h-screen px-1 py-20">
-      <h1 className="text-left text-2xl pb-5 uppercase pl-[20px]">{`${selectedCustomerType} Information`}</h1>
-      <h3 className="text-left text-xl pl-[20px]">{`Let's Connect and Grow Together`}</h3>
-      <form action="" className="overflow-hidden p-6 space-y-10">
-        {addCustomerFields.map(({ key, label, type }) => {
-          if (key === "interested_in") {
-            return (
-              <div key={key} className="flex flex-col space-y-2">
-                <InputChipComponent
-                  list={interestList}
-                  chips={selectedInterestList}
-                  originalList={interests}
-                  labelUnique="id"
-                  handleList={setInterestList}
-                  // @ts-ignore
-                  handleChip={setSelectedInterestList}
-                  placeholder={label}
-                >
-                  <Menu>
-                    {interests.map((user) => {
-                      return (
-                        <MenuItem
-                          key={user.id}
-                          onClick={() => handleInterestMenuItem(user)}
-                        >
-                          <div className="flex gap-3">
-                            <div className="flex items-center justify-between gap-2 flex-1">
-                              <h3 className="text-sm">{user.name}</h3>
-                            </div>
-                          </div>
-                        </MenuItem>
-                      );
-                    })}
-                    {interests.length === 0 && (
-                      <div className="p-4">Not Available</div>
-                    )}
-                  </Menu>
-                </InputChipComponent>
-              </div>
-            );
-          }
-          if (key === "shop_type") {
-            return (
-              <div key={key} className="flex flex-col space-y-2">
-                <InputChipComponent
-                  list={shopTypeList}
-                  chips={selectedShopType}
-                  originalList={shopTypes}
-                  labelUnique="id"
-                  handleList={setShopType}
-                  // @ts-ignore
-                  handleChip={setSelectedShopTypeList}
-                  placeholder={label}
-                >
-                  <Menu>
-                    {shopTypes.map((user) => {
-                      return (
-                        <MenuItem
-                          key={user.id}
-                          onClick={() => handleShopTypeMenuItem(user)}
-                        >
-                          <div className="flex gap-3">
-                            <div className="flex items-center justify-between gap-2 flex-1">
-                              <h3 className="text-sm">{user.name}</h3>
-                            </div>
-                          </div>
-                        </MenuItem>
-                      );
-                    })}
-                    {shopTypes.length === 0 && (
-                      <div className="p-4">Not Available</div>
-                    )}
-                  </Menu>
-                </InputChipComponent>
-              </div>
-            );
-          } else {
-            return (
-              <div key={key} className="flex flex-col space-y-2">
-                <FormInput
-                  value={customer[key]}
-                  label={label}
-                  key={key}
-                  name={key}
-                  onChange={handleChange}
-                  type={type}
-                />
-              </div>
-            );
-          }
-        })}
-        {webcamImage ? <div className="space-y-2">
-          <h4 className="text-left text-lg text-gray-400 font-lg">Image</h4>
-          <div className="flex flex-row justify-between items-center">
-          <ImageViewer imageUrl={webcamImage} /> 
+  // return (
+  //   <>
+  //     <form action="" className="overflow-hidden text-black">
+  //       <div className="flex flex-col gap-10 w-full mb-10">
+  //       <AboutSection />
+  //       <ContactSection />
+  //       <LocationSection />
+  //       <InterestSection />
+  //       </div>
+  //       {/* {addCustomerFields.map(({ key, label, type }) => {
+  //         if (key === "interested_in") {
+  //           return (
+  //             <div key={key} className="flex flex-col space-y-2">
+  //               <InputChipComponent
+  //                 list={interestList}
+  //                 chips={selectedInterestList}
+  //                 originalList={interests}
+  //                 labelUnique="id"
+  //                 handleList={setInterestList}
+  //                 // @ts-ignore
+  //                 handleChip={setSelectedInterestList}
+  //                 placeholder={label}
+  //               >
+  //                 <Menu>
+  //                   {interests.map((user) => {
+  //                     return (
+  //                       <MenuItem
+  //                         key={user.id}
+  //                         onClick={() => handleInterestMenuItem(user)}
+  //                       >
+  //                         <div className="flex gap-3">
+  //                           <div className="flex items-center justify-between gap-2 flex-1">
+  //                             <h3 className="text-sm">{user.name}</h3>
+  //                           </div>
+  //                         </div>
+  //                       </MenuItem>
+  //                     );
+  //                   })}
+  //                   {interests.length === 0 && (
+  //                     <div className="p-4">Not Available</div>
+  //                   )}
+  //                 </Menu>
+  //               </InputChipComponent>
+  //             </div>
+  //           );
+  //         }
+  //         if (key === "shop_type") {
+  //           return (
+  //             <div key={key} className="flex flex-col space-y-2">
+  //               <InputChipComponent
+  //                 list={shopTypeList}
+  //                 chips={selectedShopType}
+  //                 originalList={shopTypes}
+  //                 labelUnique="id"
+  //                 handleList={setShopType}
+  //                 // @ts-ignore
+  //                 handleChip={setSelectedShopTypeList}
+  //                 placeholder={label}
+  //               >
+  //                 <Menu>
+  //                   {shopTypes.map((user) => {
+  //                     return (
+  //                       <MenuItem
+  //                         key={user.id}
+  //                         onClick={() => handleShopTypeMenuItem(user)}
+  //                       >
+  //                         <div className="flex gap-3">
+  //                           <div className="flex items-center justify-between gap-2 flex-1">
+  //                             <h3 className="text-sm">{user.name}</h3>
+  //                           </div>
+  //                         </div>
+  //                       </MenuItem>
+  //                     );
+  //                   })}
+  //                   {shopTypes.length === 0 && (
+  //                     <div className="p-4">Not Available</div>
+  //                   )}
+  //                 </Menu>
+  //               </InputChipComponent>
+  //             </div>
+  //           );
+  //         } else {
+  //           return (
+  //             <div key={key} className="flex flex-col space-y-2">
+  //               <FormInput
+  //                 value={customer[key]}
+  //                 label={label}
+  //                 key={key}
+  //                 name={key}
+  //                 onChange={handleChange}
+  //                 type={type}
+  //               />
+  //             </div>
+  //           );
+  //         }
+  //       })} */}
+  //       {webcamImage ? <div className="space-y-2">
+  //         <h4 className="text-left text-lg text-gray-400 font-lg">Image</h4>
+  //         <div className="flex flex-row justify-between items-center">
+  //         <ImageViewer imageUrl={webcamImage} /> 
 
-          <button 
-            className="bg-transparent text-red-500 border-0 outline-0"
-            onClick={handleImageRemove}
-            >remove</button>
+  //         <button 
+  //           className="bg-transparent text-red-500 border-0 outline-0"
+  //           onClick={handleImageRemove}
+  //           >remove</button>
 
-          </div>
-        </div> : null}
-        {audio ? <div className="space-y-2">
-          <h4 className="text-left text-lg text-gray-400 font-lg">Audio</h4>
-          <div className="flex flex-row justify-between items-center">
-            <AudioPlayerComponent url={audio} size="w-16 h-16" iconSize="w-6 h-6" buttonColor="border-gray-500" color="gray" />
-            <button 
-            className="bg-transparent text-red-500 border-0 outline-0"
-            onClick={handleAudioRemove}
-            >remove</button> 
-          </div>
-        </div> : null}
-        <ExpandableFloatingButton>
-          <FloatingButton
-            contentType="audio"
-            color="bg-blue-500 hover:bg-blue-700"
-            onClick={() => setOpenRecorder(true)}
-            position="absolute left-[20px] w-20"
-            text="Record Audio"
-          />
-          <FloatingButton
-            contentType="photo"
-            color="bg-blue-500 hover:bg-blue-700"
-            onClick={() => setOpenCamera(true)}
-            position="absolute left-[120px] w-20"
-            text="Take Photo"
-          />
-        </ExpandableFloatingButton>
-        <PrimaryButton
-          onClick={handleClick}
-          buttonText="Submit"
-          variant="secondary"
-          classNames="w-full mt-2"
-        ></PrimaryButton>
-      </form>
-      {openCamera ? (
-        <WebCamComponent
-          onSave={(url) => setWebcamImage(url)}
-          onClose={() => setOpenCamera(false)}
-        />
-      ) : null}
+  //         </div>
+  //       </div> : null}
+  //       {audio ? <div className="space-y-2">
+  //         <h4 className="text-left text-lg text-gray-400 font-lg">Audio</h4>
+  //         <div className="flex flex-row justify-between items-center">
+  //           <AudioPlayerComponent url={audio} size="w-16 h-16" iconSize="w-6 h-6" buttonColor="border-gray-500" color="gray" />
+  //           <button 
+  //           className="bg-transparent text-red-500 border-0 outline-0"
+  //           onClick={handleAudioRemove}
+  //           >remove</button> 
+  //         </div>
+  //       </div> : null}
+  //       <ExpandableFloatingButton>
+  //         <FloatingButton
+  //           contentType="audio"
+  //           color="bg-blue-500 hover:bg-blue-700"
+  //           onClick={() => setOpenRecorder(true)}
+  //           position="absolute left-[20px] w-20"
+  //           text="Record Audio"
+  //         />
+  //         <FloatingButton
+  //           contentType="photo"
+  //           color="bg-blue-500 hover:bg-blue-700"
+  //           onClick={() => setOpenCamera(true)}
+  //           position="absolute left-[120px] w-20"
+  //           text="Take Photo"
+  //         />
+  //       </ExpandableFloatingButton>
+  //       <PrimaryButton
+  //         onClick={handleClick}
+  //         buttonText="Submit"
+  //         variant="secondary"
+  //         classNames="w-full mt-2"
+  //       ></PrimaryButton>
+  //     </form>
+  //     {openCamera ? (
+  //       <WebCamComponent
+  //         onSave={(url) => setWebcamImage(url)}
+  //         onClose={() => setOpenCamera(false)}
+  //       />
+  //     ) : null}
 
-      {openRecorder ? (
-        <AudioRecorderComponent
-          onSave={(url) => setAudio(url)}
-          onClose={() => setOpenRecorder(false)}
-        />
-      ) : null}
-    </div>
-  );
+  //     {openRecorder ? (
+  //       <AudioRecorderComponent
+  //         onSave={(url) => setAudio(url)}
+  //         onClose={() => setOpenRecorder(false)}
+  //       />
+  //     ) : null}
+  //   </>
+  // );
 }
 
 // For attachment

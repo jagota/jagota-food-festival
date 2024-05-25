@@ -49,6 +49,7 @@ export const Footer = () => {
   console.log("pathname", pathname);
 
   if (!user) return null;
+  if (pathname === "/login" || pathname === "/add-customer") return null;
 
   const renderIcon = (icon: iconType) => {
     return <Icon contentType={icon} />;

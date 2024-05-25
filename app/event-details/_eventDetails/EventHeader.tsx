@@ -23,7 +23,12 @@ export const EventHeader: React.FC = (): ReactElement => {
       </button>
                 <h4 className='text-[#192434] text-[22px] font-semibold capitalize pl-4'>{selectedEvent?.name}</h4>
             </div>
-           {selectedEvent?.thumbnail ? <Image src={selectedEvent?.thumbnail} width={48} height={48} alt={selectedEvent.name || "event"} /> : null}
+           {selectedEvent?.thumbnail 
+           ? <Image 
+           className="rounded-[12px] ml-4"
+           src={selectedEvent?.thumbnail} 
+           width={48} height={48} alt={selectedEvent.name || "event"} /> 
+           : null}
         </div>
     )
 }
