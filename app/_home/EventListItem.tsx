@@ -28,10 +28,10 @@ interface Props {
   }
 export const EventListItem = ({ event}: Props) => {
     const {selectEvent, selectedEvent} = useEvent();
-    const isSelected = selectedEvent === event.code;
+    const isSelected = selectedEvent?.code === event.code;
     const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
-        selectEvent(isSelected ? null : event.code);
+        selectEvent(event);
     }
     return (
         <Card className={classes.card(isSelected, bgColors[event.code] )} onClick={handleClick}>

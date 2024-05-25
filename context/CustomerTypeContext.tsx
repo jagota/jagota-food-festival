@@ -1,14 +1,14 @@
 'use client'
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { LocalStorage } from "@/utils/LocalStorage.utils";
-
+export type CustomerType = "customer" | "supplier";
 // Create a context to manage authentication-related data and functions
 const CustomerTypeContext = createContext<{
-  selectedCustomerType: string | null;
-  selectCustomerType: (customerType: null | string) => void;
+  selectedCustomerType: CustomerType | null;
+  selectCustomerType: (customerType: null | CustomerType) => void;
 }>({
     selectedCustomerType: null,
-    selectCustomerType: (customerType: null | string) => {},
+    selectCustomerType: (customerType: null | CustomerType) => {},
 });
 
 const useCustomerType = () => useContext(CustomerTypeContext);
@@ -16,9 +16,9 @@ const useCustomerType = () => useContext(CustomerTypeContext);
 const CustomerTypeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [selectedCustomerType, setSelectedCustomerType] = useState<string | null>(null);
+  const [selectedCustomerType, setSelectedCustomerType] = useState<CustomerType | null>(null);
 
-  const selectCustomerType = (customerType: null | string) => {
+  const selectCustomerType = (customerType: null | CustomerType) => {
     setSelectedCustomerType(customerType);
     LocalStorage.set("selectedCustomerType", customerType);
   };

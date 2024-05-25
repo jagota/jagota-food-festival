@@ -1,7 +1,7 @@
 export const images = {
     thaifex: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fthaifex.png",
-    customer: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fcustomer.svg",
-    supplier: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fsupplier.svg",
+    customer: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fcustomer.png",
+    supplier: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fsupplier.png",
     qr: {
         line: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fline-jagota-qr.jpeg",
         jagotaWeb: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fjagota-web-qr.png",

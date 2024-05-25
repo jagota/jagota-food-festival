@@ -1,15 +1,17 @@
 'use client'
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
 import { LocalStorage } from "@/utils/LocalStorage.utils";
+import { IEvent } from "@/interfaces/Event.interface";
 
 const apiCall = () => Promise.resolve({ data: "Hello World!" });
 // Create a context to manage authentication-related data and functions
 const EventContext = createContext<{
-  selectedEvent: string | null;
-  selectEvent: (event: null | string) => void;
+  selectedEvent: IEvent | null;
+  selectEvent: (event: IEvent | null) => void;
 }>({
     selectedEvent: null,
-    selectEvent: (event: null | string) => {},
+    selectEvent: (event: IEvent | null) => {},
 });
 
 const useEvent = () => useContext(EventContext);
@@ -17,11 +19,14 @@ const useEvent = () => useContext(EventContext);
 const EventProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [selectedEvent, setSelectedEvent] = useState<string | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<IEvent | null>(null);
+  const router = useRouter()
 
-  const selectEvent = (event: null | string) => {
+
+  const selectEvent = (event: IEvent | null) => {
     setSelectedEvent(event);
     LocalStorage.set("selectedEvent", event);
+    router.replace("/event-details")
   };
 
   useEffect(() => {
