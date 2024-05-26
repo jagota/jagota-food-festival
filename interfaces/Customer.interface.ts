@@ -12,10 +12,11 @@ export interface ICustomerFormData {
     district?: string;
     image?: string;
     audio?: string;
+    attachments?: string[];
 }
 export interface ICustomerForm {
     interested_in: string[];
-    shop_type: string[];
+    shop_type: ChipItem[];
     contactPersonName: string;
     companyName: string;
     mobile?: string;
@@ -30,7 +31,7 @@ export interface ICustomerForm {
 export interface ICustomerToDB extends ICustomerForm {
     salesPerson: string;
     customerType: string;
-    source?: string;
+    event?: string;
 }
 
 export interface CustomerInterface extends ICustomerToDB {

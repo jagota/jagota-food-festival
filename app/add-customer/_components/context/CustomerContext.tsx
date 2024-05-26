@@ -18,6 +18,7 @@ const initialCustomerFormState: ICustomerFormData = {
     district: "",
     image: "",
     audio: "",
+    attachments: [],
 };
 const CustomerFormContext = createContext<{
   customer: ICustomerFormData;
