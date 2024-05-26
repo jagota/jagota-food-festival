@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button"
 
 export const CustomerForm = () => {
     const { customer} = useCustomerForm()
-    const handleClick = () => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         console.log("submit", customer);
     }
     return (

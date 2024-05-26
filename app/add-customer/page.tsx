@@ -65,17 +65,7 @@ const addCustomerFields = [
   },
 ];
 
-const shopTypes: ChipItem[] = [
-  { id: 1, name: "Coffee shop" },
-  { id: 2, name: "Dry Food" },
-  { id: 3, name: "Food Court" },
-  { id: 4, name: "French" },
-  { id: 5, name: "Frozen Food Distributor" },
-  { id: 6, name: "German" },
-  { id: 7, name: "Hotel - 3 star" },
-  { id: 8, name: "Hotel - 4 star" },
-  { id: 9, name: "Hotel - 5 star" },
-];
+
 
 export default function AddCustomer() {
   const [devMode, setDevMode] = useState(true)

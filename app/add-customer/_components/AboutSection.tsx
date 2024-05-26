@@ -4,6 +4,7 @@ import { FormInput } from "@/components/formInput";
 import { useCustomerForm } from "./context/CustomerContext";
 import { HiMiniBuildingLibrary, HiUser } from "react-icons/hi2";
 import cntl from "cntl";
+import { ShopTypeComponent } from "./Shoptype";
 
 const classes = {
     icon: cntl`
@@ -45,19 +46,7 @@ export const AboutSection = () => {
                 fillOpacity={customer.companyName ? 0.76 : 0.10}
                 />
                 </FormInput>
-            <FormInput
-                  value={customer.companyName}
-                  label={"Shop Type"}
-                  name={"companyName"}
-                  onChange={handleChange}
-                  type={"text"}
-                >
-                      <HiUser 
-                className={classes.icon} 
-                fill={customer.contactPersonName ? "#006CFA" : "#1A3860"} 
-                fillOpacity={customer.contactPersonName ? 0.76 : 0.10}
-                />
-                </FormInput>
+                <ShopTypeComponent />
         </div>
     )
 }

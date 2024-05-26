@@ -3,10 +3,10 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 import { LocalStorage } from "@/utils/LocalStorage.utils";
 import { addCustomer } from "@/apihandler/customer.api";
-import { ICustomerForm, ICustomerToDB } from "@/interfaces/Customer.interface";
+import { ICustomerForm, ICustomerFormData, ICustomerToDB } from "@/interfaces/Customer.interface";
 // Create a context to manage authentication-related data and functions
 
-const initialCustomerFormState: ICustomerForm = {
+const initialCustomerFormState: ICustomerFormData = {
     interested_in: [],
     shop_type: [],
     contactPersonName: "",
@@ -20,7 +20,7 @@ const initialCustomerFormState: ICustomerForm = {
     audio: "",
 };
 const CustomerFormContext = createContext<{
-  customer: ICustomerForm;
+  customer: ICustomerFormData;
   addValueToCustomer: (key: string, value: any) => void;
 }>({
     customer: initialCustomerFormState,
@@ -32,7 +32,7 @@ const useCustomerForm = () => useContext(CustomerFormContext);
 const CustomerFormProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [customer, setCustomer] = useState<ICustomerForm>(initialCustomerFormState);
+  const [customer, setCustomer] = useState<ICustomerFormData>(initialCustomerFormState);
 
   const addValueToCustomer = (key: string, value: any) => {
     setCustomer({ ...customer, [key]: value });

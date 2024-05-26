@@ -4,7 +4,7 @@ import { ChipItem } from "./chipItem.type";
 interface Chip {
   image?: string;
   label?: string;
-  handleChip: () => void;
+  handleChip: (item: ChipItem) => void;
   handleList: () => void;
   selectedId: string | number;
   item: ChipItem;
@@ -20,6 +20,7 @@ const Chip: FC<Chip> = ({
   // @ts-ignore
   isHighlight,
 }) => {
+
   return (
     <div
       className={`rounded-full bg-[#ddd] px-3 py-1 flex gap-1 flex-row items-center transition-all hover:text-white hover:bg-blue-500 ${
@@ -32,17 +33,14 @@ const Chip: FC<Chip> = ({
       <button
         className="text-xs rounded-full hover:bg-[#aaa] flex justify-center items-center transition-all"
         title="Remove"
-        onClick={() => {
+        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+          e.preventDefault();
           // @ts-ignore
           handleList((prev) => {
             return [...prev, item];
           });
           // @ts-ignore
-          handleChip((prev) => {
-            return prev.filter((item: ChipItem) => {
-              return item.id !== selectedId;
-            });
-          });
+          handleChip(item);
         }}
       >
         <svg
