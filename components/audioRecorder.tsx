@@ -105,7 +105,8 @@ export const AudioRecorderComponent = ({
     };
   };
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     if (recordingStatus === "recording") {
       stopRecording();
     } else {
@@ -132,7 +133,7 @@ export const AudioRecorderComponent = ({
   };
 
   return (
-    <div className="fixed top-0 bottom-0 min-w-full min-h-screen">
+    <div className="fixed top-0 bottom-0 left-0 right-0 z-10">
       
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-neutral-50 to-violet-300">
         <div className="relative shadow-xl min-h-[400px] bg-gradient-to-r to-cyan-500 from-blue-500 md:w-[400px] w-[95%] px-[2rem] py-[3.5rem] text-white">
