@@ -8,10 +8,11 @@ import { useAuth } from "@/context/AuthContext";
 import { getCustomers } from "@/apihandler/customer.api";
 
 interface IProps {
-    types: string[]
+    searchTerm?: string
 }
-export const CustomerList = () => {
+export const CustomerList = ({ searchTerm }: IProps) => {
     let [customers, setCustomers] = useState<CustomerInterface[]>([]);
+    let [showCustomer, setShowCustomers] = useState<CustomerInterface[]>([]);
     const { user } = useAuth();
     useEffect(() => {
         async function fetchCustomers() { 
@@ -25,13 +26,24 @@ export const CustomerList = () => {
             fetchCustomers();
         }
     }, [user]);
+
+    useEffect(() => {
+        if (searchTerm) {
+            let text = ''
+          const filteredCustomer= customers.filter((customer) => {
+            text = customer.contactPersonName + customer.companyName;
+            return text.toLowerCase().includes(searchTerm.toLowerCase())
+          });
+          setShowCustomers(filteredCustomer);
+        } else {
+            setShowCustomers(customers);
+        }
+      }, [searchTerm, customers])
     
     return (
-        <div className='container mx-auto'>
-            <h1 className='text-xl font-bold text-center mt-4 text-gray-400'>Customers</h1>
-            <p className='text-left text-base text-gray-500 mb-10'>Total : {customers.length}</p>
-            <div className='grid lg:grid-cols-3 xl:grid-cols-3 gap-[2rem] md:grid-cols-2 grid-cols-1'>
-            {customers && customers.map((item, index) => {
+        <div className=''>
+            <div className='flex flex-col gap-2'>
+            {showCustomer && showCustomer.map((item, index) => {
                 return <CustomerItem key={index} customer={item}/>
             })}
         </div>

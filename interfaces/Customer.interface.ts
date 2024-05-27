@@ -13,6 +13,8 @@ export interface ICustomerFormData {
     image?: string;
     audio?: string;
     attachments?: string[];
+    customerType?: string;
+    event?: string;
 }
 export interface ICustomerForm {
     interested_in: string[];
@@ -26,6 +28,7 @@ export interface ICustomerForm {
     district?: string;
     image?: string;
     audio?: string;
+    attachments?: string[];
 }
 
 export interface ICustomerToDB extends ICustomerForm {
@@ -36,5 +39,6 @@ export interface ICustomerToDB extends ICustomerForm {
 
 export interface CustomerInterface extends ICustomerToDB {
     username: string;
+    _id: string;
 }
   

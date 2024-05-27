@@ -14,7 +14,11 @@ import { useCustomerType } from '@/context/CustomerTypeContext';
 import { useEvent } from '@/context/EventContext';
 import { useAuth } from '@/context/AuthContext';
 
-export const CustomerForm = () => {
+interface CustomerFormProps {
+  edit: boolean
+}
+
+export const CustomerForm = ({ edit }: CustomerFormProps) => {
     const { customer} = useCustomerForm();
     const { selectedCustomerType } = useCustomerType();
     const { selectedEvent } = useEvent();
@@ -52,10 +56,10 @@ export const CustomerForm = () => {
         <LocationSection />
         <InterestSection /> 
         <MediaSection />
-        <Button
+        {edit ? <Button
             variant={"default"}
           onClick={handleClick}
-        >Submit</Button>
+        >Submit</Button> : null}
       </form>
     )
 }

@@ -22,7 +22,7 @@ const links: linkType[] = [
     icon: "product",
   },
   {
-    text: "Quick Links",
+    text: "Quick Link",
     link: "/quick-links",
     icon: "link",
   },

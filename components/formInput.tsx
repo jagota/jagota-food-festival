@@ -16,11 +16,11 @@ export const FormInput = ({label, name, onChange, value, type, children}: FormIn
         onChange={onChange}
         placeholder=""
         value={value}
-        className="block h-[52px] py-2.5 pl-3 pr-12 w-full text-lg text-[#192739]/94 appearance-none focus:outline-none bg-transparent"
+        className="block h-[52px] py-2.5 pl-3 pr-12 w-full text-lg text-[#1C304A] text-opacity-80 appearance-none focus:outline-none bg-transparent"
       />
       <label
         htmlFor={name}
-        className="absolute top-0 text-lg text-[#1C304A]/52 bg-white py-2.5 pl-3 z-1 duration-300 origin-0"
+        className="absolute top-0 text-lg text-[#1C304A] text-opacity-80 bg-white py-2.5 pl-3 z-1 duration-300 origin-0"
       >
         {label}
       </label>

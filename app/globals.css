@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+:root {
+  --radix-popover-trigger-width: 100%;
+  --radix-popper-anchor-width: 100%;
+  --radix-popper-available-width: 100%;
+  --secondary-color: #000;
+}
+div[data-radix-popper-content-wrapper] {
+  width: 100% !important;
+  padding: 0 40px;
+}
+
 input:focus-within ~ label,
 input:not(:placeholder-shown) ~ label {
   @apply transform scale-75 -translate-y-6;

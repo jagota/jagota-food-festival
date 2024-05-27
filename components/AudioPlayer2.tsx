@@ -54,7 +54,7 @@ export const AudioPlayer2Component = ({ url }: IAudioRecorderComponentProps) => 
   console.log("audio status", audioRef?.current?.duration, audioRef?.current?.currentTime)
 
   return (
-    <div className="audio-player">
+    <div className="audio-player flex w-full justify-center">
       <audio className={classes.audio} ref={audioRef} src={url} controls></audio>
       <div>
         
