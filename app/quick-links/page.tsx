@@ -14,22 +14,22 @@ const links: link[] = [
   {
     text: "Website",
     link: "https://www.jagota.com",
-    image: "/jagota-web-qr.png",
+    image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fjagota-web-qr.png",
   },
   {
     text: "Facebook",
     link: "https://www.facebook.com/jagotathailand",
-    image: "/facebook-jagota-qr.png",
+    image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Ffacebook-jagota-qr.png",
   },
   {
     text: "Instagram",
     link: "https://www.instagram.com/jagotaofficial",
-    image: "/instagram-jagota-qr.png",
+    image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Finstagram-jagota-qr.png",
   },
   {
     text: "Line",
     link: "https://www.instagram.com/jagotaofficial",
-    image: "/instagram-jagota-qr.png",
+    image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fline-jagota-qr.jpeg",
   },
 ];
 

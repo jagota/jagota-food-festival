@@ -39,7 +39,7 @@ const classes = {
   ${active ? "bg-indigo-500" : "bg-transparent"}
   `,
   link: (active: boolean) => cntl`
-  inline-block text-center mx-auto px-4 py-2 w-full text-gray-400 group-hover:text-blue-500
+  inline-block text-center mx-auto px-2 py-1 w-full text-gray-400 group-hover:text-blue-500
   ${active ? "text-blue-500" : "text-gray-400"}
   `
 }
@@ -62,6 +62,7 @@ export const Footer = () => {
         <Link
           href={item.link}
           className={classes.link(active)}
+          target={item.text === "Catalogue" ? "_blank" : "_self"}
         >
           <span className="flex flex-col items-center">
             {renderIcon(item.icon)}
@@ -73,7 +74,7 @@ export const Footer = () => {
     );
   };
   return (
-    <div className="min-w-full bg-white px-5 fixed bottom-0 min-h-[40px] z-10">
+    <div className="min-w-full bg-white px-2 fixed bottom-0 min-h-[40px] z-10">
       <div className="flex justify-between items-center">
         {links.map((item) => {
           return renderItem(item);

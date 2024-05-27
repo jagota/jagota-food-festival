@@ -22,7 +22,7 @@ export const AboutSection = () => {
             <h2 className="text-[#192434] text-lg font-semibold">About</h2>
             <FormInput
                   value={customer.contactPersonName}
-                  label={"Contact Person"}
+                  label={"Contact Person*"}
                   name={"contactPersonName"}
                   onChange={handleChange}
                   type={"text"}
@@ -35,7 +35,7 @@ export const AboutSection = () => {
             </FormInput>
             <FormInput
                   value={customer.companyName}
-                  label={"Company Name"}
+                  label={"Company/Shop Name*"}
                   name={"companyName"}
                   onChange={handleChange}
                   type={"text"}
