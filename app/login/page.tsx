@@ -65,6 +65,8 @@ const Login = () => {
 
                         {/* <button type="submit" className="bg-white border-[1px] border-transparent text-2xl text-cyan-500 py-3 transition-all hover:bg-transparent hover:border-white hover:text-white">Login</button> */}
                         <button type="submit"  onClick={handleLogin} className="group mt-[2rem] overflow-hidden rounded-full bg-transparent border-[2px] text-2xl font-bold text-white h-[50px] relative before:content-[''] before:absolute before:inset-0 before:rounded-full before:bg-white before:w-[0%] before:duration-300 hover:before:w-[100%]"><span className="absolute z-10 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:text-blue-500">Login</span></button>
+                      <br />
+                      <p className="text-right text-xs text-white">202405271719</p>
                     </div>
                 </div>
             </div>
