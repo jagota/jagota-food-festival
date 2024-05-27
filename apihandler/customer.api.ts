@@ -13,6 +13,12 @@ interface IGetCustomerResponse {
     message: string;
 }
 
+interface IGetOneCustomerResponse {
+    error: boolean;
+    data?: CustomerInterface;
+    message: string;
+}
+
 interface ICreateCustomerResponse {
     error: boolean;
     data?: CustomerInterface;
@@ -40,4 +46,14 @@ const getCustomers = async (salesPerson: string): Promise<IGetCustomerResponse> 
     return {error: true, message: data.message};
 }
 
-export { addCustomer, getCustomers, runtime }
+const getOneCustomer = async (customerId: string): Promise<IGetOneCustomerResponse> => {
+    const res = await apiClient.get(`/customers/${customerId}`)
+    const { data } = res;
+    console.log("data", data);
+    if (data.success) {
+        return {error: false, data: data.data, message: "success"};
+    }
+    return {error: true, message: data.message};
+}
+
+export { addCustomer, getCustomers, getOneCustomer, runtime }

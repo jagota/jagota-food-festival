@@ -6,7 +6,7 @@ interface Menu {
 
 const Menu: FC<Menu> = ({ children }) => {
   return (
-    <div className="z-20 rounded-md flex flex-row flex-wrap gap-x-2 gap-y-1 px-2 py-3 shadow hover:shadow-lg bg-[#e7e5e4] max-h-[300px]">
+    <div className="z-20 rounded-md overflow-y-scroll flex flex-row flex-wrap gap-2 px-2 py-3 shadow hover:shadow-lg bg-[#e7e5e4] max-h-[350px]">
       {children}
     </div>
   );

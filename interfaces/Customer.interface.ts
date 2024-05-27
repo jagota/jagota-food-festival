@@ -1,24 +1,10 @@
-export interface CustomerInterface {
-    username: string;
-    salesPerson: string;
-    interested_in: [string];
-    shop_type: [string];
-    name: string;
-    mobile: string;
-    email: string;
-    line: string;
-    province: string;
-    district: string;
-    image: string;
-    audio: string;
-    source: string;
-}
+import { ChipItem } from "@/components/chip-component/chipItem.type";
 
-export interface ICustomerToDB {
-    salesPerson: string;
+export interface ICustomerFormData {
     interested_in: string[];
-    shop_type: string[];
-    name: string;
+    shop_type: ChipItem[];
+    contactPersonName: string;
+    companyName: string;
     mobile?: string;
     email: string;
     line: string;
@@ -26,6 +12,33 @@ export interface ICustomerToDB {
     district?: string;
     image?: string;
     audio?: string;
-    source?: string;
+    attachments?: string[];
+    customerType?: string;
+    event?: string;
+}
+export interface ICustomerForm {
+    interested_in: string[];
+    shop_type: ChipItem[];
+    contactPersonName: string;
+    companyName: string;
+    mobile?: string;
+    email: string;
+    line: string;
+    province?: string;
+    district?: string;
+    image?: string;
+    audio?: string;
+    attachments?: string[];
+}
+
+export interface ICustomerToDB extends ICustomerForm {
+    salesPerson: string;
+    customerType: string;
+    event?: string;
+}
+
+export interface CustomerInterface extends ICustomerToDB {
+    username: string;
+    _id: string;
 }
   

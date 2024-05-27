@@ -22,7 +22,6 @@ const classes = {
   text-base absolute z-0 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]
   ${variant === 'primary' ? 'group-hover:text-blue-500' : ''}
   ${variant === 'secondary' ? 'group-hover:text-white' : ''}
-
   `
 }
 

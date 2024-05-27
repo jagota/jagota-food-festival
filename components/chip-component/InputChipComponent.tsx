@@ -9,6 +9,7 @@ import {
   import { ChipItem } from "./chipItem.type";
   import { Chip } from "./chip";
 import { useOnOutsideClick } from "@/hooks/useOutsideClick";
+import { HiChevronDown, HiChevronUp, HiUser } from "react-icons/hi2";
   
   interface InputChipComponent {
     list: ChipItem[];
@@ -17,7 +18,7 @@ import { useOnOutsideClick } from "@/hooks/useOutsideClick";
     labelUnique: string;
     children: ReactNode;
     handleList: Dispatch<SetStateAction<ChipItem[]>>;
-    handleChip: Dispatch<SetStateAction<ChipItem[]>>;
+    handleChip: (item: ChipItem) => void;
     placeholder: string;
   }
   
@@ -68,10 +69,12 @@ import { useOnOutsideClick } from "@/hooks/useOutsideClick";
       if (keyType == "Backspace" && isInputText && chips.length > 0) {
         if (isToBeDeleted.isReadyToDelete) {
           let item: ChipItem;
-          handleChip((prevList) => {
-            item = prevList[prevList.length - 1];
-            return [...prevList.slice(0, prevList.length - 1)];
-          });
+          // handleChip((prevList) => {
+          //   item = prevList[prevList.length - 1];
+          //   return [...prevList.slice(0, prevList.length - 1)];
+          // });
+          handleChip(chips[chips.length - 1]);
+
   
           handleList((prev) => {
             return [...prev, item];
@@ -140,6 +143,16 @@ import { useOnOutsideClick } from "@/hooks/useOutsideClick";
               onKeyUp={(e) => handleBackDelete(e)}
               placeholder={placeholder}
             />
+             {isFocused ? <HiChevronUp
+                className={"absolute right-2 top-[14px] w-6 h-6"} 
+                fill={chips.length ? "#006CFA" : "#1A3860"} 
+                fillOpacity={chips.length ? 0.76 : 0.10}
+                />
+                : <HiChevronDown 
+                className={"absolute right-2 top-[14px] w-6 h-6"} 
+                fill={chips.length ? "#006CFA" : "#1A3860"} 
+                fillOpacity={chips.length ? 0.76 : 0.10}
+                />}
           </div>
         </div>
         {isFocused && <div className="absolute w-full z-20">{children}</div>}
