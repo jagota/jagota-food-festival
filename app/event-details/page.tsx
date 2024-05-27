@@ -26,7 +26,7 @@ export default function EventDetails() {
         <h1 className="text-[28px] text-[#192434] font-semibold">{`Let's Create Your Customer Profile!`}</h1>
         <h4 className="leading-7 text-base text-[#192739]/94 font-normal">{`Kindly let us know the type of business you're interested in?`}</h4>
       </div>
-      <div className="flex flex-col gap-6 pt-20">
+      <div className="flex flex-col gap-6 pt-10">
         <button onClick={(e: React.MouseEvent<HTMLButtonElement>) => handleClick(e, "customer")} className="relative h-[195px] w-full max-w-[400px] mx-auto">
           <Image src={images.customer} fill alt={"customer"} />
         </button>

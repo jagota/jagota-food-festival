@@ -8,10 +8,11 @@ import { useAuth } from "@/context/AuthContext";
 import { getCustomers } from "@/apihandler/customer.api";
 
 interface IProps {
-    types: string[]
+    searchTerm?: string
 }
-export const CustomerList = () => {
+export const CustomerList = ({ searchTerm }: IProps) => {
     let [customers, setCustomers] = useState<CustomerInterface[]>([]);
+    let [showCustomer, setShowCustomers] = useState<CustomerInterface[]>([]);
     const { user } = useAuth();
     useEffect(() => {
         async function fetchCustomers() { 
@@ -25,11 +26,24 @@ export const CustomerList = () => {
             fetchCustomers();
         }
     }, [user]);
+
+    useEffect(() => {
+        if (searchTerm) {
+            let text = ''
+          const filteredCustomer= customers.filter((customer) => {
+            text = customer.contactPersonName + customer.companyName;
+            return text.toLowerCase().includes(searchTerm.toLowerCase())
+          });
+          setShowCustomers(filteredCustomer);
+        } else {
+            setShowCustomers(customers);
+        }
+      }, [searchTerm, customers])
     
     return (
         <div className=''>
             <div className='flex flex-col gap-2'>
-            {customers && customers.map((item, index) => {
+            {showCustomer && showCustomer.map((item, index) => {
                 return <CustomerItem key={index} customer={item}/>
             })}
         </div>

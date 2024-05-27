@@ -18,7 +18,7 @@ const CustomerItem = ({ customer }: Props) => {
       onClick={handleClick}
       className="py-4 px-2  border-b border-[#1A3860]/10"
     >
-      <p className="flex text-lg font-semibold text-[#192739]/94 w-20 whitespace-nowrap overflow-hidden text-ellipsis">
+      <p className="flex text-lg font-semibold text-[#192739]/94 w-80 whitespace-nowrap overflow-hidden text-ellipsis">
         {customer.contactPersonName} {customer.companyName}
       </p>
     </button>

@@ -65,8 +65,8 @@ export default function QuickLinks() {
               className="pointer w-40 h-40 bg-white rounded-[8px] flex flex-col justify-center items-center gap-1 m-auto"
             >
               <Image
-                width={60}
-                height={60}
+                width={120}
+                height={120}
                 src={item.image}
                 className="mb-2"
                 alt={item.text}

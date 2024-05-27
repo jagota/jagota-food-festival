@@ -18,11 +18,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { locationNameType } from "@/app/add-customer/_components/LocationSection"
 
 interface ComboxProps {
     value: string
     setValue: (value: string) => void
-    list: { id: string; name: string }[],
+    list: locationNameType[],
     placeholder: string,
     name?: string
 }
@@ -30,7 +31,7 @@ interface ComboxProps {
 export function Combobox({ value = "", setValue, list = [], placeholder, name }: ComboxProps) {
   const [open, setOpen] = React.useState(false)
 //   const [value, setValue] = React.useState("")
-
+ const listItem = value ? list.find((item) => item.name_e === value) : undefined;
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -40,8 +41,8 @@ export function Combobox({ value = "", setValue, list = [], placeholder, name }:
           aria-expanded={open}
           className="w-full justify-between relative border border-[#1A3860]/10 rounded-[4px] h-[52px] py-2.5 px-3 w-full text-lg text-[#1C304A] text-opacity-50"
         >
-          {value
-            ? list.find((item) => item.name === value)?.name
+          {listItem 
+            ? `${listItem?.name_e} / ${listItem?.name_t}`
             : (placeholder ? placeholder : "Select ...")}
           {/* <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" /> */}
           {name === "province" 
@@ -62,8 +63,8 @@ export function Combobox({ value = "", setValue, list = [], placeholder, name }:
            {list.map((item) => (
               <CommandItem
                 className="p-1 text-base text-[#1C304A] text-opacity-50"
-                key={item.id}
-                value={item.name}
+                key={item.name_e}
+                value={item.name_e}
                 onSelect={(currentValue) => {
                   setValue(currentValue === value ? "" : currentValue)
                   setOpen(false)
@@ -72,10 +73,10 @@ export function Combobox({ value = "", setValue, list = [], placeholder, name }:
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === item.name ? "opacity-100" : "opacity-0"
+                    value === item.name_e ? "opacity-100" : "opacity-0"
                   )}
                 />
-                {item.name}
+                {item.name_e}/ {item.name_t}
               </CommandItem>
             ))}
            </CommandList>

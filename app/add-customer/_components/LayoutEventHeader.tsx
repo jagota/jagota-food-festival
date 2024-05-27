@@ -20,12 +20,8 @@ export const LayoutEventHeader: React.FC = (): ReactElement => {
       >
         <HiArrowSmallLeft className="w-8 h-8 text-black" />
       </button>
-      <div className="flex flex-row items-center">
-        <h4 className="text-[#192434] text-[22px] font-semibold capitalize pl-4">
-          {selectedEvent?.name}
-        </h4>
-
-        {selectedEvent?.thumbnail ? (
+      <div className="flex flex-row-reverse items-center">
+      {selectedEvent?.thumbnail ? (
           <Image
             src={selectedEvent?.thumbnail}
             width={48}
@@ -34,6 +30,11 @@ export const LayoutEventHeader: React.FC = (): ReactElement => {
             className="rounded-[12px] ml-4"
           />
         ) : null}
+        <h4 className="text-[#192434] text-right text-[22px] font-semibold capitalize pl-4 w-60 whitespace-nowrap overflow-hidden text-ellipsis">
+          {selectedEvent?.name}
+        </h4>
+
+        
       </div>
     </div>
   );
