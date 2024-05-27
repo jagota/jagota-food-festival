@@ -27,10 +27,8 @@ export const CustomerList = () => {
     }, [user]);
     
     return (
-        <div className='container mx-auto'>
-            <h1 className='text-xl font-bold text-center mt-4 text-gray-400'>Customers</h1>
-            <p className='text-left text-base text-gray-500 mb-10'>Total : {customers.length}</p>
-            <div className='grid lg:grid-cols-3 xl:grid-cols-3 gap-[2rem] md:grid-cols-2 grid-cols-1'>
+        <div className=''>
+            <div className='flex flex-col gap-2'>
             {customers && customers.map((item, index) => {
                 return <CustomerItem key={index} customer={item}/>
             })}

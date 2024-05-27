@@ -23,7 +23,7 @@ export default function Home() {
       <Header />
       <SearchBar />
       <EventList />
-      <FloatingButton
+      {/* <FloatingButton
             contentType="plus"
             color="bg-blue-500 hover:bg-blue-700"
             onClick={() => {selectCustomerType("customer");router.push("/add-customer");}}
@@ -36,7 +36,7 @@ export default function Home() {
             onClick={() => {selectCustomerType("supplier");router.push("/add-customer");}}
             position="fixed bottom-20 right-10 w-20"
             text="Supplier"
-          />
+          /> */}
     </div>
   );
 }
