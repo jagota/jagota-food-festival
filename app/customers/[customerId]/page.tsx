@@ -18,3 +18,5 @@ export default function CustomerViewPage({ params}: CustomerIdPageProps) {
       </CustomerFormProvider>
     )
 }
+
+export const runtime = 'edge';
