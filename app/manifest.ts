@@ -17,18 +17,18 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/x-icon',
       },
       {
-        src: '/icons/icon-192.png',
+        src: '/splash-logo.png',
         sizes: '192x192',
         type: 'image/png',
         purpose: 'maskable',
       },
       {
-        src: '/icons/icon-384.png',
+        src: '/splash-logo.png',
         sizes: '384x384',
         type: 'image/png',
       },
       {
-        src: '/icons/icon-512.png',
+        src: '/splash-logo.png',
         sizes: '512x512',
         type: 'image/png',
       },

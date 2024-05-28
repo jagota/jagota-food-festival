@@ -61,6 +61,16 @@ const getCustomers = async (salesPerson: string): Promise<IGetCustomerResponse> 
     return {error: true, message: data.message};
 }
 
+const getAllCustomers = async (): Promise<IGetCustomerResponse> => {
+    const res = await apiClient.get(`/customers/all`)
+    const { data } = res;
+    console.log("data", data);
+    if (data.success) {
+        return {error: false, data: data.data, message: "success"};
+    }
+    return {error: true, message: data.message};
+}
+
 const getOneCustomer = async (customerId: string): Promise<IGetOneCustomerResponse> => {
     const res = await apiClient.get(`/customers/${customerId}`)
     const { data } = res;
@@ -71,4 +81,4 @@ const getOneCustomer = async (customerId: string): Promise<IGetOneCustomerRespon
     return {error: true, message: data.message};
 }
 
-export { addCustomer, getCustomers, getOneCustomer, runtime }
+export { addCustomer, getCustomers, getAllCustomers, getOneCustomer, runtime }
