@@ -18,7 +18,7 @@ export const FormInput = ({label, name, pattern, maxLength, onChange, value, typ
         onChange={onChange}
         placeholder=""
         maxLength={maxLength}
-        pattern={pattern}
+        pattern={pattern} 
         value={value}
         className="block h-[52px] py-2.5 pl-3 pr-12 w-full text-lg text-[#1C304A] text-opacity-80 appearance-none focus:outline-none bg-transparent"
       />
