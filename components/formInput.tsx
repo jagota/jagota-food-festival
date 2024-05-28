@@ -5,8 +5,10 @@ export interface FormInputProps extends React.InputHTMLAttributes<HTMLInputEleme
     value?: string;
     type?: string;
     children?: React.ReactNode;
+    maxLength?: number;
+    pattern?: string;
   }
-export const FormInput = ({label, name, onChange, value, type, children}: FormInputProps) => {
+export const FormInput = ({label, name, pattern, maxLength, onChange, value, type, children}: FormInputProps) => {
   return (
     <div className="outline outline-0 relative border border-[#1A3860]/10 focus-within:border-[#006CFA]/76">
       <input
@@ -15,6 +17,8 @@ export const FormInput = ({label, name, onChange, value, type, children}: FormIn
         name={name}
         onChange={onChange}
         placeholder=""
+        maxLength={maxLength}
+        pattern={pattern}
         value={value}
         className="block h-[52px] py-2.5 pl-3 pr-12 w-full text-lg text-[#1C304A] text-opacity-80 appearance-none focus:outline-none bg-transparent"
       />
