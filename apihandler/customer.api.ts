@@ -1,5 +1,5 @@
 import { CustomerInterface, ICustomerToDB } from '@/interfaces/Customer.interface';
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 // Create an Axios instance for API requests
 const apiClient = axios.create({
     baseURL: process.env.NEXT_PUBLIC_SEVER_API_URL,
@@ -27,12 +27,28 @@ interface ICreateCustomerResponse {
 // API functions for different actions
 const runtime = 'edge';
 const addCustomer = async (customerData: ICustomerToDB): Promise<ICreateCustomerResponse> => {
-    const res = await apiClient.post('/customers/add', customerData)
-    const { data } = res;
-    if (data.success) {
-        return {error: false, data: data.customer, message: "success"};
+    try {
+        const res = await apiClient.post('/customers/add', customerData)
+        const { data } = res;
+        console.log("data", data);
+        if (data.success) {
+            return {error: false, data: data.customer, message: "success"};
+        }
+        return {error: true, message: data.message};
+    } catch (error: any) {
+        console.log("error", error);
+        if (axios.isAxiosError(error)) {
+            const err = error as AxiosError;
+            if (err.response) {
+
+                const { data } = err.response;
+                if ((data as any).message && typeof (data as any).message === "string") {
+                    return { error: true, message: (data as any).message };
+                }
+            }
+        }
+        return {error: true, message: (error as any).message};
     }
-    return {error: true, message: data.message};
 }
 
 const getCustomers = async (salesPerson: string): Promise<IGetCustomerResponse> => {
