@@ -7,6 +7,7 @@ import { FormInput } from "@/components/formInput";
 import { useCustomerForm } from "./context/CustomerContext";
 import { useEffect, useState } from "react";
 import { Combobox } from "@/components/ui/ComboBox";
+import { useCustomerType } from "@/context/CustomerTypeContext";
 
 export type locationNameType = {name_e: string, name_t: string}
 const provinces: locationNameType[] = [
@@ -4341,8 +4342,206 @@ const amphur: Record<string, locationNameType[]> = {
     ]
   }
 
+const countries: locationNameType[] = [
+    {"name_e": "Afghanistan", "name_t": "อัฟกานิสถาน"},
+    {"name_e": "Albania", "name_t": "แอลเบเนีย"},
+    {"name_e": "Algeria", "name_t": "แอลจีเรีย"},
+    {"name_e": "Andorra", "name_t": "อันดอร์รา"},
+    {"name_e": "Angola", "name_t": "แองโกลา"},
+    {"name_e": "Antigua and Barbuda", "name_t": "แอนติกาและบาร์บูดา"},
+    {"name_e": "Argentina", "name_t": "อาร์เจนตินา"},
+    {"name_e": "Armenia", "name_t": "อาร์เมเนีย"},
+    {"name_e": "Australia", "name_t": "ออสเตรเลีย"},
+    {"name_e": "Austria", "name_t": "ออสเตรีย"},
+    {"name_e": "Azerbaijan", "name_t": "อาเซอร์ไบจาน"},
+    {"name_e": "Bahamas", "name_t": "บาฮามาส"},
+    {"name_e": "Bahrain", "name_t": "บาห์เรน"},
+    {"name_e": "Bangladesh", "name_t": "บังกลาเทศ"},
+    {"name_e": "Barbados", "name_t": "บาร์เบโดส"},
+    {"name_e": "Belarus", "name_t": "เบลารุส"},
+    {"name_e": "Belgium", "name_t": "เบลเยียม"},
+    {"name_e": "Belize", "name_t": "เบลีซ"},
+    {"name_e": "Benin", "name_t": "เบนิน"},
+    {"name_e": "Bhutan", "name_t": "ภูฏาน"},
+    {"name_e": "Bolivia", "name_t": "โบลิเวีย"},
+    {"name_e": "Bosnia and Herzegovina", "name_t": "บอสเนียและเฮอร์เซโกวีนา"},
+    {"name_e": "Botswana", "name_t": "บอตสวานา"},
+    {"name_e": "Brazil", "name_t": "บราซิล"},
+    {"name_e": "Brunei", "name_t": "บรูไน"},
+    {"name_e": "Bulgaria", "name_t": "บัลแกเรีย"},
+    {"name_e": "Burkina Faso", "name_t": "บูร์กินาฟาโซ"},
+    {"name_e": "Burundi", "name_t": "บุรุนดี"},
+    {"name_e": "Cabo Verde", "name_t": "เคปเวิร์ด"},
+    {"name_e": "Cambodia", "name_t": "กัมพูชา"},
+    {"name_e": "Cameroon", "name_t": "แคเมอรูน"},
+    {"name_e": "Canada", "name_t": "แคนาดา"},
+    {"name_e": "Central African Republic", "name_t": "สาธารณรัฐแอฟริกากลาง"},
+    {"name_e": "Chad", "name_t": "ชาด"},
+    {"name_e": "Chile", "name_t": "ชิลี"},
+    {"name_e": "China", "name_t": "จีน"},
+    {"name_e": "Colombia", "name_t": "โคลอมเบีย"},
+    {"name_e": "Comoros", "name_t": "คอโมโรส"},
+    {"name_e": "Congo", "name_t": "คองโก"},
+    {"name_e": "Costa Rica", "name_t": "คอสตาริกา"},
+    {"name_e": "Croatia", "name_t": "โครเอเชีย"},
+    {"name_e": "Cuba", "name_t": "คิวบา"},
+    {"name_e": "Cyprus", "name_t": "ไซปรัส"},
+    {"name_e": "Czech Republic", "name_t": "สาธารณรัฐเช็ก"},
+    {"name_e": "Denmark", "name_t": "เดนมาร์ก"},
+    {"name_e": "Djibouti", "name_t": "จิบูตี"},
+    {"name_e": "Dominica", "name_t": "โดมินิกา"},
+    {"name_e": "Dominican Republic", "name_t": "สาธารณรัฐโดมินิกัน"},
+    {"name_e": "East Timor", "name_t": "ติมอร์-เลสเต"},
+    {"name_e": "Ecuador", "name_t": "เอกวาดอร์"},
+    {"name_e": "Egypt", "name_t": "อียิปต์"},
+    {"name_e": "El Salvador", "name_t": "เอลซัลวาดอร์"},
+    {"name_e": "Equatorial Guinea", "name_t": "อิเควทอเรียลกินี"},
+    {"name_e": "Eritrea", "name_t": "เอริเทรีย"},
+    {"name_e": "Estonia", "name_t": "เอสโตเนีย"},
+    {"name_e": "Eswatini", "name_t": "เอสวาตินี"},
+    {"name_e": "Ethiopia", "name_t": "เอธิโอเปีย"},
+    {"name_e": "Fiji", "name_t": "ฟีจี"},
+    {"name_e": "Finland", "name_t": "ฟินแลนด์"},
+    {"name_e": "France", "name_t": "ฝรั่งเศส"},
+    {"name_e": "Gabon", "name_t": "กาบอง"},
+    {"name_e": "Gambia", "name_t": "แกมเบีย"},
+    {"name_e": "Georgia", "name_t": "จอร์เจีย"},
+    {"name_e": "Germany", "name_t": "เยอรมนี"},
+    {"name_e": "Ghana", "name_t": "กานา"},
+    {"name_e": "Greece", "name_t": "กรีซ"},
+    {"name_e": "Grenada", "name_t": "เกรเนดา"},
+    {"name_e": "Guatemala", "name_t": "กัวเตมาลา"},
+    {"name_e": "Guinea", "name_t": "กินี"},
+    {"name_e": "Guinea-Bissau", "name_t": "กินี-บิสเซา"},
+    {"name_e": "Guyana", "name_t": "กายอานา"},
+    {"name_e": "Haiti", "name_t": "เฮติ"},
+    {"name_e": "Honduras", "name_t": "ฮอนดูรัส"},
+    {"name_e": "Hungary", "name_t": "ฮังการี"},
+    {"name_e": "Iceland", "name_t": "ไอซ์แลนด์"},
+    {"name_e": "India", "name_t": "อินเดีย"},
+    {"name_e": "Indonesia", "name_t": "อินโดนีเซีย"},
+    {"name_e": "Iran", "name_t": "อิหร่าน"},
+    {"name_e": "Iraq", "name_t": "อิรัก"},
+    {"name_e": "Ireland", "name_t": "ไอร์แลนด์"},
+    {"name_e": "Israel", "name_t": "อิสราเอล"},
+    {"name_e": "Italy", "name_t": "อิตาลี"},
+    {"name_e": "Jamaica", "name_t": "จาเมกา"},
+    {"name_e": "Japan", "name_t": "ญี่ปุ่น"},
+    {"name_e": "Jordan", "name_t": "จอร์แดน"},
+    {"name_e": "Kazakhstan", "name_t": "คาซัคสถาน"},
+    {"name_e": "Kenya", "name_t": "เคนยา"},
+    {"name_e": "Kiribati", "name_t": "คิริบาส"},
+    {"name_e": "Korea, North", "name_t": "เกาหลีเหนือ"},
+    {"name_e": "Korea, South", "name_t": "เกาหลีใต้"},
+    {"name_e": "Kuwait", "name_t": "คูเวต"},
+    {"name_e": "Kyrgyzstan", "name_t": "คีร์กีซสถาน"},
+    {"name_e": "Laos", "name_t": "ลาว"},
+    {"name_e": "Latvia", "name_t": "ลัตเวีย"},
+    {"name_e": "Lebanon", "name_t": "เลบานอน"},
+    {"name_e": "Lesotho", "name_t": "เลโซโท"},
+    {"name_e": "Liberia", "name_t": "ไลบีเรีย"},
+    {"name_e": "Libya", "name_t": "ลิเบีย"},
+    {"name_e": "Liechtenstein", "name_t": "ลิกเตนสไตน์"},
+    {"name_e": "Lithuania", "name_t": "ลิทัวเนีย"},
+    {"name_e": "Luxembourg", "name_t": "ลักเซมเบิร์ก"},
+    {"name_e": "Madagascar", "name_t": "มาดากัสการ์"},
+    {"name_e": "Malawi", "name_t": "มาลาวี"},
+    {"name_e": "Malaysia", "name_t": "มาเลเซีย"},
+    {"name_e": "Maldives", "name_t": "มัลดีฟส์"},
+    {"name_e": "Mali", "name_t": "มาลี"},
+    {"name_e": "Malta", "name_t": "มอลตา"},
+    {"name_e": "Marshall Islands", "name_t": "หมู่เกาะมาร์แชลล์"},
+    {"name_e": "Mauritania", "name_t": "มอริเตเนีย"},
+    {"name_e": "Mauritius", "name_t": "มอริเชียส"},
+    {"name_e": "Mexico", "name_t": "เม็กซิโก"},
+    {"name_e": "Micronesia", "name_t": "ไมโครนีเซีย"},
+    {"name_e": "Moldova", "name_t": "มอลโดวา"},
+    {"name_e": "Monaco", "name_t": "โมนาโก"},
+    {"name_e": "Mongolia", "name_t": "มองโกเลีย"},
+    {"name_e": "Montenegro", "name_t": "มอนเตเนโกร"},
+    {"name_e": "Morocco", "name_t": "โมร็อกโก"},
+    {"name_e": "Mozambique", "name_t": "โมซัมบิก"},
+    {"name_e": "Myanmar", "name_t": "พม่า"},
+    {"name_e": "Namibia", "name_t": "นามิเบีย"},
+    {"name_e": "Nauru", "name_t": "นาอูรู"},
+    {"name_e": "Nepal", "name_t": "เนปาล"},
+    {"name_e": "Netherlands", "name_t": "เนเธอร์แลนด์"},
+    {"name_e": "New Zealand", "name_t": "นิวซีแลนด์"},
+    {"name_e": "Nicaragua", "name_t": "นิการากัว"},
+    {"name_e": "Niger", "name_t": "ไนเจอร์"},
+    {"name_e": "Nigeria", "name_t": "ไนจีเรีย"},
+    {"name_e": "North Macedonia", "name_t": "มาซิโดเนียเหนือ"},
+    {"name_e": "Norway", "name_t": "นอร์เวย์"},
+    {"name_e": "Oman", "name_t": "โอมาน"},
+    {"name_e": "Pakistan", "name_t": "ปากีสถาน"},
+    {"name_e": "Palau", "name_t": "ปาเลา"},
+    {"name_e": "Palestine", "name_t": "ปาเลสไตน์"},
+    {"name_e": "Panama", "name_t": "ปานามา"},
+    {"name_e": "Papua New Guinea", "name_t": "ปาปัวนิวกินี"},
+    {"name_e": "Paraguay", "name_t": "ปารากวัย"},
+    {"name_e": "Peru", "name_t": "เปรู"},
+    {"name_e": "Philippines", "name_t": "ฟิลิปปินส์"},
+    {"name_e": "Poland", "name_t": "โปแลนด์"},
+    {"name_e": "Portugal", "name_t": "โปรตุเกส"},
+    {"name_e": "Qatar", "name_t": "กาตาร์"},
+    {"name_e": "Romania", "name_t": "โรมาเนีย"},
+    {"name_e": "Russia", "name_t": "รัสเซีย"},
+    {"name_e": "Rwanda", "name_t": "รวันดา"},
+    {"name_e": "Saint Kitts and Nevis", "name_t": "เซนต์คิตส์และเนวิส"},
+    {"name_e": "Saint Lucia", "name_t": "เซนต์ลูเซีย"},
+    {"name_e": "Saint Vincent and the Grenadines", "name_t": "เซนต์วินเซนต์และเกรนาดีนส์"},
+    {"name_e": "Samoa", "name_t": "ซามัว"},
+    {"name_e": "San Marino", "name_t": "ซานมารีโน"},
+    {"name_e": "Sao Tome and Principe", "name_t": "เซาตูเมและปรินซีปี"},
+    {"name_e": "Saudi Arabia", "name_t": "ซาอุดีอาระเบีย"},
+    {"name_e": "Senegal", "name_t": "เซเนกัล"},
+    {"name_e": "Serbia", "name_t": "เซอร์เบีย"},
+    {"name_e": "Seychelles", "name_t": "เซเชลส์"},
+    {"name_e": "Sierra Leone", "name_t": "เซียร์ราลีโอน"},
+    {"name_e": "Singapore", "name_t": "สิงคโปร์"},
+    {"name_e": "Slovakia", "name_t": "สโลวาเกีย"},
+    {"name_e": "Slovenia", "name_t": "สโลวีเนีย"},
+    {"name_e": "Solomon Islands", "name_t": "หมู่เกาะโซโลมอน"},
+    {"name_e": "Somalia", "name_t": "โซมาเลีย"},
+    {"name_e": "South Africa", "name_t": "แอฟริกาใต้"},
+    {"name_e": "South Sudan", "name_t": "ซูดานใต้"},
+    {"name_e": "Spain", "name_t": "สเปน"},
+    {"name_e": "Sri Lanka", "name_t": "ศรีลังกา"},
+    {"name_e": "Sudan", "name_t": "ซูดาน"},
+    {"name_e": "Suriname", "name_t": "ซูรินาเม"},
+    {"name_e": "Sweden", "name_t": "สวีเดน"},
+    {"name_e": "Switzerland", "name_t": "สวิตเซอร์แลนด์"},
+    {"name_e": "Syria", "name_t": "ซีเรีย"},
+    {"name_e": "Taiwan", "name_t": "ไต้หวัน"},
+    {"name_e": "Tajikistan", "name_t": "ทาจิกิสถาน"},
+    {"name_e": "Tanzania", "name_t": "แทนซาเนีย"},
+    {"name_e": "Thailand", "name_t": "ไทย"},
+    {"name_e": "Togo", "name_t": "โตโก"},
+    {"name_e": "Tonga", "name_t": "ตองกา"},
+    {"name_e": "Trinidad and Tobago", "name_t": "ตรินิแดดและโตเบโก"},
+    {"name_e": "Tunisia", "name_t": "ตูนิเซีย"},
+    {"name_e": "Turkey", "name_t": "ตุรกี"},
+    {"name_e": "Turkmenistan", "name_t": "เติร์กเมนิสถาน"},
+    {"name_e": "Tuvalu", "name_t": "ตูวาลู"},
+    {"name_e": "Uganda", "name_t": "ยูกันดา"},
+    {"name_e": "Ukraine", "name_t": "ยูเครน"},
+    {"name_e": "United Arab Emirates", "name_t": "สหรัฐอาหรับเอมิเรตส์"},
+    {"name_e": "United Kingdom", "name_t": "สหราชอาณาจักร"},
+    {"name_e": "United States", "name_t": "สหรัฐอเมริกา"},
+    {"name_e": "Uruguay", "name_t": "อุรุกวัย"},
+    {"name_e": "Uzbekistan", "name_t": "อุซเบกิสถาน"},
+    {"name_e": "Vanuatu", "name_t": "วานูอาตู"},
+    {"name_e": "Vatican City", "name_t": "นครวาติกัน"},
+    {"name_e": "Venezuela", "name_t": "เวเนซุเอลา"},
+    {"name_e": "Vietnam", "name_t": "เวียดนาม"},
+    {"name_e": "Yemen", "name_t": "เยเมน"},
+    {"name_e": "Zambia", "name_t": "แซมเบีย"},
+    {"name_e": "Zimbabwe", "name_t": "ซิมบับเว"}
+]
+
 export const LocationSection = () => {
     const {customer, location, addLocation, addValueToCustomer} = useCustomerForm();
+    const { selectedCustomerType } = useCustomerType();
     const [amphurList, setAmphurList] = useState<locationNameType[]>([]);
 
     const setProvince = (province: string) => {
@@ -4352,16 +4551,26 @@ export const LocationSection = () => {
         addValueToCustomer("district", amphur);
     }
 
+    const setCountry = (province: string) => {
+      addValueToCustomer("country", province);
+    }
+
     useEffect(() => {
         console.log(customer.province);
         if (!customer.province) return;
         setAmphurList(amphur[customer.province]);
-    }, [customer.province])
+    }, [customer.province]);
 
-    return (
-        <div className="flex flex-col w-full gap-4">
-            <h2 className="text-[#192434] text-lg font-semibold">Location</h2>
-            <div className="relative">
+    const renderLocationForSupplier = () => {
+      return (<div className="relative">
+      <Combobox name="province" list={countries} value={customer?.country || ""} setValue={setCountry} placeholder="Select Country" />
+
+      </div>)
+    }
+
+    const renderLocationForCustomer = () => {
+      return (<>
+          <div className="relative">
             <Combobox name="province" list={provinces} value={customer?.province || ""} setValue={setProvince} placeholder="Select Province" />
 
             </div>
@@ -4369,6 +4578,13 @@ export const LocationSection = () => {
             <Combobox list={amphurList} value={customer?.district || ""} setValue={setAmphur} placeholder="Select Amphur" />
 
             </div>
+      </>)
+    }
+
+    return (
+        <div className="flex flex-col w-full gap-4">
+            <h2 className="text-[#192434] text-lg font-semibold">Location</h2>
+            {selectedCustomerType === "customer" ? renderLocationForCustomer() : renderLocationForSupplier()}
         </div>
     )
 }

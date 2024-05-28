@@ -23,7 +23,7 @@ export const ContactSection = () => {
             <h2 className="text-[#192434] text-lg font-semibold">Contact</h2>
             <FormInput
                   value={customer.mobile}
-                  label={"Phone Number"}
+                  label={"Phone Number*"}
                   name={"mobile"}
                   onChange={handleChange}
                   type={"tel"}

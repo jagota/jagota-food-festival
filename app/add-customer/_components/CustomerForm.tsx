@@ -71,6 +71,7 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
       return;
     }
     const addCustomerRes = await addCustomer(customerData);
+    console.log("addCustomerRes", addCustomerRes)
     if (addCustomerRes.error === false) {
       Swal.fire({
         title: "Customer Added Successfully!",
@@ -80,6 +81,13 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
         if (result.isConfirmed) {
           router.push("/customers");
         }
+      });
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: addCustomerRes.message,
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
