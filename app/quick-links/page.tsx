@@ -9,10 +9,12 @@ type link = {
   text: string;
   link: string;
   image: string;
+  logo: string;
 };
 const links: link[] = [
   {
     text: "Website",
+    logo: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fweb.svg",
     link: "https://www.jagota.com",
     image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fjagota-web-qr.png",
   },
@@ -20,16 +22,19 @@ const links: link[] = [
     text: "Facebook",
     link: "https://www.facebook.com/jagotathailand",
     image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Ffacebook-jagota-qr.png",
+    logo: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Ffacebook.svg"
   },
   {
     text: "Instagram",
     link: "https://www.instagram.com/jagotaofficial",
     image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Finstagram-jagota-qr.png",
+    logo: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Finstagram.svg"
   },
   {
     text: "Line",
     link: "https://www.instagram.com/jagotaofficial",
     image: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fqr%2Fline-jagota-qr.jpeg",
+    logo: "https://pub-fb5a013cefbf40f9b1b5aab8fb330e8f.r2.dev/assets%2Fline.svg"
   },
 ];
 
@@ -71,7 +76,14 @@ export default function QuickLinks() {
                 className="mb-2"
                 alt={item.text}
               />
-              <h4 className="text-black text-sm font-medium">{item.text}</h4>
+              {/* <h4 className="text-black text-sm font-medium">{item.text}</h4> */}
+              <Image
+                width={20}
+                height={20}
+                src={item.logo}
+                className=""
+                alt={item.text}
+              />
             </button>
             <div className={classes.fullWidthQr(openQr === item.text)}>
                 <div className="w-[310px] relative">
