@@ -7,6 +7,7 @@ import { images } from "@/constants/images";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useCustomerType } from "@/context/CustomerTypeContext";
 
 export const interests: ChipItem[] = [
   { id: 1, name: "Meat" },
@@ -84,9 +85,11 @@ const classes = {
 };
 export const InterestSection = () => {
   const { customer, addValueToCustomer } = useCustomerForm();
+  const { selectedCustomerType } = useCustomerType();
   const [allInterest, setAllInterest] =
     useState<Record<string, boolean>>(initialAllInterest);
   const [open, setOpen] = useState(false);
+  const title = selectedCustomerType === "customer" ? "Interests" : "Supply Product Category"
 
   const handleSelect = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -148,7 +151,7 @@ export const InterestSection = () => {
             <HiArrowSmallLeft className="w-8 h-8 text-black" />
           </button>
           <h4 className="text-[#192434] text-[22px] font-semibold capitalize">
-            {"interests"}
+            {title}
           </h4>
           <span className="w-10 "></span>
         </div>
@@ -170,7 +173,7 @@ export const InterestSection = () => {
   return (
     <div className="flex flex-col w-full gap-4">
       <div>
-        <h2 className="text-[#192434] text-lg font-semibold">Interests</h2>
+        <h2 className="text-[#192434] text-lg font-semibold">{title}</h2>
         <h4 className="text-[#1B2B41]/69 text-sm font-medium">
           Get specific about the thing you interest.
         </h4>

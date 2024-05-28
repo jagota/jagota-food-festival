@@ -15,6 +15,7 @@ export interface ICustomerFormData {
     attachments?: string[];
     customerType?: string;
     event?: string;
+    country?: string;
 }
 export interface ICustomerForm {
     interested_in: string[];
@@ -29,6 +30,7 @@ export interface ICustomerForm {
     image?: string;
     audio?: string;
     attachments?: string[];
+    country?: string;
 }
 
 export interface ICustomerToDB extends ICustomerForm {

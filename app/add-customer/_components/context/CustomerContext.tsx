@@ -74,6 +74,7 @@ const CustomerFormProvider: React.FC<{ children: React.ReactNode }> = ({
       attachments: customerDB.attachments,
       customerType: customerDB.customerType,
       event: customerDB.event,
+      country: customerDB.country,
     });
   };
 
