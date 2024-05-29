@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
@@ -13,6 +13,15 @@ export const metadata: Metadata = {
   title: "Jagota Events",
   description: "Jagota Food festival",
 };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  // Also supported by less commonly used
+  // interactiveWidget: 'resizes-visual',
+}
 
 export default function RootLayout({
   children,
