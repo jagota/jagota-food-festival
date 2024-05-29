@@ -92,6 +92,11 @@ import { HiChevronDown, HiChevronUp, HiUser } from "react-icons/hi2";
         }
       }
     };
+
+    const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+      setIsFocused((prev) => !prev);
+    }
   
     useEffect(() => {
       const filteredList = originalList;
@@ -143,16 +148,19 @@ import { HiChevronDown, HiChevronUp, HiUser } from "react-icons/hi2";
               onKeyUp={(e) => handleBackDelete(e)}
               placeholder={placeholder}
             />
-             {isFocused ? <HiChevronUp
-                className={"absolute right-2 top-[14px] w-6 h-6"} 
+            <button onClick={handleClose} className="bg-transparent rounded-full absolute right-2 top-[14px]">
+            {isFocused ? <HiChevronUp
+                className={"w-6 h-6"} 
                 fill={chips.length ? "#006CFA" : "#1A3860"} 
                 fillOpacity={chips.length ? 0.76 : 0.10}
                 />
                 : <HiChevronDown 
-                className={"absolute right-2 top-[14px] w-6 h-6"} 
+                className={"w-6 h-6"} 
                 fill={chips.length ? "#006CFA" : "#1A3860"} 
                 fillOpacity={chips.length ? 0.76 : 0.10}
                 />}
+            </button>
+             
           </div>
         </div>
         {isFocused && <div className="absolute w-full z-20">{children}</div>}

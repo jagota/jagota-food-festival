@@ -63,7 +63,7 @@ const classes = {
     
     `,
   optionContainer: (isSelectedOptions: boolean) => cntl`
-    flex flex-row flex-wrap gap-2.5
+    flex flex-row flex-wrap gap-2.5 overflow-scroll
     ${isSelectedOptions ? "" : ""}
     `,
   item: (isSelected: boolean, goingToBeSelected: boolean) => cntl`
@@ -142,7 +142,7 @@ export const InterestSection = () => {
   };
   if (open) {
     return (
-      <div className="fixed top-0 left-0 w-full min-h-screen z-10 bg-white px-4 py-5 flex flex-col gap-6">
+      <div className="fixed top-0 left-0 right-0 bottom-0 z-10 bg-white px-4 py-5 flex flex-col gap-6">
         <div className="w-full h-12 flex justify-between items-center overflow-hidden">
           <button
             onClick={handleClick}
@@ -150,7 +150,7 @@ export const InterestSection = () => {
           >
             <HiArrowSmallLeft className="w-8 h-8 text-black" />
           </button>
-          <h4 className="text-[#192434] text-[22px] font-semibold capitalize">
+          <h4 className="text-[#192434] text-xl font-semibold capitalize whitespace-nowrap overflow-hidden text-ellipsis">
             {title}
           </h4>
           <span className="w-10 "></span>
@@ -159,13 +159,15 @@ export const InterestSection = () => {
 
         <h2 className="text-[#192434] text-lg font-semibold">Categories</h2>
 
+        <div className="h-[650px] pb-4 overflow-scroll">
         <div className={classes.optionContainer(false)}>
           {interests.map((interest) => renderInterest(interest.name, false))}
         </div>
-        <div className="fixed left-0 px-4 w-full h-10 bottom-10 flex justify-center">
+        <div className="bg-white px-4 mt-8 w-full h-10 flex justify-center">
           <Button className="w-full" onClick={handleSubmitInterest} variant={"default"}>
             Continue
           </Button>
+        </div>
         </div>
       </div>
     );
