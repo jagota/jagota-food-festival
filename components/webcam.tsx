@@ -77,8 +77,11 @@ const WebCamComponent = ({ onClose, onSave }: IWebCamComponentProps) => {
           </button>
           {!img ? (
             <button
-              onClick={() =>
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+                e.preventDefault();
                 setFacingMode(facingMode === "user" ? "environment" : "user")
+              }
+                
               }
               className="w-12 h-12 bg-indigo text-white transition-colors duration-150 rounded-full focus:shadow-outline"
             >
