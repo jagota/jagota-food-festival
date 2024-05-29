@@ -18,7 +18,7 @@ export const CustomerList = ({ searchTerm }: IProps) => {
   let [showCustomer, setShowCustomers] = useState<CustomerInterface[]>([]);
   let [showAll, setShowAll] = useState(false);
   const { user } = useAuth();
-  const idAdmin = user?.staffCode === "SUNIL04";
+  const idAdmin = user?.staffCode === "SUNIL04" || user?.staffCode === "JBT04";
   useEffect(() => {
     async function fetchCustomers() {
       const res = await getCustomers(user?.staffCode || "");
