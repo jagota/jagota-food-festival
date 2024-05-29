@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { useCustomerType } from "@/context/CustomerTypeContext";
 import { useEvent } from "@/context/EventContext";
 import { useAuth } from "@/context/AuthContext";
+import { emailIsValid } from "@/lib/email.util";
 
 interface CustomerFormProps {
   edit: boolean;
@@ -41,6 +42,13 @@ const validateForm = (customer: ICustomerToDB): IFormError => {
       }
     }
   });
+  // validate email
+  if (customer.email !== "") {
+    if (emailIsValid(customer.email) === false) {
+      error = true;
+      messages.push("Email is not valid");
+    }
+  }
   return { error, messages };
 };
 
@@ -65,6 +73,14 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
       Swal.fire({
         title: "Error",
         text: validatedObj.messages[0],
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+      return;
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "every things is ok",
         icon: "error",
         confirmButtonText: "OK",
       });

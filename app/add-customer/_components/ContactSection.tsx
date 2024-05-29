@@ -25,6 +25,8 @@ export const ContactSection = () => {
                   value={customer.mobile}
                   label={"Phone Number*"}
                   name={"mobile"}
+                  pattern="[+]{1}[0-9]{1,14}" 
+                  maxLength={15}
                   onChange={handleChange}
                   type={"tel"}
                 >
@@ -39,7 +41,7 @@ export const ContactSection = () => {
                   label={"Email"}
                   name={"email"}
                   onChange={handleChange}
-                  type={"text"}
+                  type={"email"}
                 >
                      <HiMiniEnvelope 
                 className={classes.icon} 
