@@ -30,12 +30,14 @@ const locationData: { provinces: ChipItem[], amphur: ChipItem[]} = {
 const CustomerFormContext = createContext<{
   customer: ICustomerFormData;
   addValueToCustomer: (key: string, value: any) => void;
+  getDataFromAiVision: (data: any) => void;
   loadData: (customerDB: CustomerInterface) => void;
   addLocation: (key: "provinces" | "amphur", value: ChipItem[]) => void;
    location: { provinces: ChipItem[], amphur: ChipItem[]}
 }>({
     customer: initialCustomerFormState,
     addValueToCustomer: (key: string, value: any) => {},
+    getDataFromAiVision: (data: any) => {},
     loadData: (customerDB: CustomerInterface) => {},
     addLocation: (key: "provinces" | "amphur", value: ChipItem[]) => {},
    location: locationData
@@ -78,9 +80,27 @@ const CustomerFormProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
+  const getDataFromAiVision = (data: any) => {
+    if (data && typeof data === 'object') {
+      const {fullName, mobile, companyName, address, email} = data;
+      const addressArray = address.split(",");
+      const province = addressArray[0];
+      const district = addressArray[1];
+      setCustomer({
+        ...customer,
+        contactPersonName: fullName,
+        mobile: mobile,
+        companyName: companyName,
+        province,
+        district,
+        email: email,
+      });
+    }
+  }
+
   // Provide authentication-related data and functions through the context
   return (
-    <CustomerFormContext.Provider value={{ addValueToCustomer, customer, loadData, addLocation, location }}>
+    <CustomerFormContext.Provider value={{ addValueToCustomer, getDataFromAiVision, customer, loadData, addLocation, location }}>
       {children}
     </CustomerFormContext.Provider>
   );

@@ -14,6 +14,7 @@ import { useCustomerType } from "@/context/CustomerTypeContext";
 import { useEvent } from "@/context/EventContext";
 import { useAuth } from "@/context/AuthContext";
 import { emailIsValid } from "@/lib/email.util";
+import { AiVision } from "./AiVision";
 
 interface CustomerFormProps {
   edit: boolean;
@@ -57,6 +58,7 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
   const { selectedCustomerType } = useCustomerType();
   const { selectedEvent } = useEvent();
   const { user } = useAuth();
+  const idAdmin = user?.staffCode === "SUNIL04" || user?.staffCode === "JBT04";
   const router = useRouter();
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -73,14 +75,6 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
       Swal.fire({
         title: "Error",
         text: validatedObj.messages[0],
-        icon: "error",
-        confirmButtonText: "OK",
-      });
-      return;
-    } else {
-      Swal.fire({
-        title: "Error",
-        text: "every things is ok",
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -112,6 +106,7 @@ export const CustomerForm = ({ edit }: CustomerFormProps) => {
       action=""
       className="overflow-hidden flex flex-col gap-10 w-full mb-10"
     >
+      {idAdmin ? <AiVision /> : null}
       <AboutSection />
       <ContactSection />
       <LocationSection />
